@@ -3,12 +3,11 @@
 よ！よ！ドンダよ！
 
 #### 大檔案傳輸方法:
-https://git-lfs.github.com/
-
+去 [lfs官網](https://git-lfs.github.com/)下載(mac/linux是這樣 windows我不知道 (求補充))
 ```
 $ git lfs install
 $ git lfs track "*.csv"
-$ git add .gitattributes
+$ git add .gitattributes 
 $ git add file.psd
 $ git commit -m "Add design file"
 $ git push origin master
