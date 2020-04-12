@@ -1,0 +1,54 @@
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "15"; */
+"15.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "16"; */
+"16.title" = "Width:";
+
+/* Class = "NSTextFieldCell"; title = "Height:"; ObjectID = "17"; */
+"17.title" = "Height:";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "32"; */
+"32.title" = "OK";
+
+/* Class = "NSBox"; title = "Current Size"; ObjectID = "33"; */
+"33.title" = "Current Size";
+
+/* Class = "NSBox"; title = "New Size"; ObjectID = "34"; */
+"34.title" = "New Size";
+
+/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "36"; */
+"36.title" = "Width:";
+
+/* Class = "NSTextFieldCell"; title = "Height:"; ObjectID = "38"; */
+"38.title" = "Height:";
+
+/* Class = "NSTextFieldCell"; title = "---"; ObjectID = "41"; */
+"41.title" = "---";
+
+/* Class = "NSTextFieldCell"; title = "---"; ObjectID = "42"; */
+"42.title" = "---";
+
+/* Class = "NSTextFieldCell"; title = "pixels"; ObjectID = "45"; */
+"45.title" = "pixels";
+
+/* Class = "NSTextFieldCell"; title = "pixels"; ObjectID = "46"; */
+"46.title" = "pixels";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "49"; */
+"49.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "percent"; ObjectID = "50"; */
+"50.title" = "percent";
+
+/* Class = "NSMenuItem"; title = "pixels"; ObjectID = "52"; */
+"52.title" = "pixels";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "55"; */
+"55.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "pixels"; ObjectID = "56"; */
+"56.title" = "pixels";
+
+/* Class = "NSMenuItem"; title = "percent"; ObjectID = "57"; */
+"57.title" = "percent";

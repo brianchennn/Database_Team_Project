@@ -1,0 +1,12 @@
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "5"; */
+"5.title" = "Window";
+
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "7HR-MZ-4Z5"; */
+"7HR-MZ-4Z5.title" = "Item 3";
+
+/* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "Db3-r7-pYC"; */
+"Db3-r7-pYC.title" = "Item 2";
+
+/* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "h3X-n6-PMM"; */
+"h3X-n6-PMM.title" = "Item 1";
