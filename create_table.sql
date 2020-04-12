@@ -1,10 +1,10 @@
-create table champs(
+create table champ(
     champion_name varchar(15) not null,
     champion_id int default 0 NOT NULL,
     primary key (champion_id)
 );
 load data local infile './champs.csv'
-into table champs
+into table champ
 fields terminated by ','
 enclosed by '"'
 lines terminated by '\n'
@@ -32,7 +32,7 @@ create table participant(
     champion_id int NOT NULL,
     ss1 varchar(15),
     ss2 varchar(15),
-    position varchar(13) NOT NULL
+    position varchar(13) NOT NULL,
     primary key (player_id),
     foreign key (match_id) references match_info(match_id)
 );
@@ -49,7 +49,15 @@ create table teamban(
     champion_id int NOT NULL,
     banturn tinyint NOT NULL,
     primary key (match_id, banturn)
-)
+);
+
+load data local infile './teambans.csv'
+into table teamban
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+ignore 1 lines;
+
 create table stat(
     player_id int NOT NULL,
     win boolean,
@@ -69,21 +77,6 @@ create table stat(
     pentakills tinyint,
     primary key(player_id)
 );
-
-
-
-
-
-
-
-
-load data local infile './teambans.csv'
-into table teamban
-fields terminated by ','
-enclosed by '"'
-lines terminated by '\n'
-ignore 1 lines;
-
 load data local infile './stats.csv'
 into table stat
 fields terminated by ','
