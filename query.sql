@@ -19,4 +19,26 @@ from match_info as M
 order by CN desc
 limit 5;
 
-SELECT CONVERT(int, 25.65);
+/*question 5 用到stat的win,longesttimespentliving*/
+select new_t.win as win_lose , count(new_t.match_id) as cnt
+from 
+(   
+    select P.match_id ,P.player_id, S.win, AVG(S.longesttimespentliving)
+    from participant as P, stat as S
+    where P.player_id = S.player_id
+    group by P.match_id
+    having AVG(S.longesttimespentliving) >= 20
+) as new_t
+group by new_t.win
+limit 10;
+
+/*question 6*/
+select new_t.position, max(new.cnt)
+from (select P.position, P.champion_id,count(Du.match_id) as cnt
+    from (select M.duration ,M.match_id
+           from match_info as M
+           where M.duration>=2400 and M.duration<=3000) as Du, participant as P
+    where Du.match_id = P.match_id
+    group by P.champion_id
+    limit 100;) as new_t
+group by new_t.position
