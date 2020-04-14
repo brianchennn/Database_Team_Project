@@ -27,20 +27,23 @@ having 20 <= AVG(select longesttimespentliving from S where S.player_id == P.pla
 limit 5;
 
 /*question 6*/
-select new_t.champion_id,new_t2.maxx
-from(
-    select new_t.position,max(cnt) as maxx
+
+select new_t.position,new_t.champion_id, new_t.cnt,C.champion_name
+from (
+    select P.position,P.champion_id,count(Du.match_id) as cnt
     from (
-        select P.position,P.champion_id,count(Du.match_id) as cnt
-        from (select M.match_id
+            select M.match_id
             from match_info as M
-            where M.duration between 2400 and 3000) as Du,participant as P
-        where Du.match_id=P.match_id
-        group by  P.champion_id
-    ) as new_t
-    group by new_t.position
-) as new_t2
-where new_t.
+            where M.duration between 2400 and 3000
+         )  as Du,participant as P
+    where Du.match_id=P.match_id
+    group by  P.champion_id
+    order by cnt desc
+) as new_t ,champ as C
+where C.champion_id = new_t.champion_id
+group by new_t.position;
+
+
 
 select *
 from participant as P
