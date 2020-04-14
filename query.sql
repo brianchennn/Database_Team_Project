@@ -20,17 +20,20 @@ order by CN desc
 limit 5;
 
 /*question 5 尚未解出來*/
-select S.win 
-from participant as P, stat as S
-group by P.match_id
-having 20 <= AVG(select longesttimespentliving from S where S.player_id == P.player_id)
-limit 5;
-
+select if(new_t.win=0,'lose','win') as win_lose, count(new_t.match_id) as cnt
+from(
+    select P.match_id, S.win, AVG(S.longesttimespentliving)
+    from participant P,stat S
+    where P.player_id = S.player_id
+    group by P.match_id
+    having 20 <= AVG(S.longesttimespentliving) 
+) as new_t
+group by new_t.win 
 /*question 6*/
 
-select new_t.position,new_t.champion_id, new_t.cnt,C.champion_name
+select  new_t.cnt,new_t.position,new_t.champion_id,C.champion_name
 from (
-    select P.position,P.champion_id,count(Du.match_id) as cnt
+    select count(Du.match_id) as cnt,P.position,P.champion_id
     from (
             select M.match_id
             from match_info as M
@@ -41,10 +44,15 @@ from (
     order by cnt desc
 ) as new_t ,champ as C
 where C.champion_id = new_t.champion_id
-group by new_t.position;
+group by new_t.position
 
-
-
-select *
-from participant as P
-limit 1;
+/*question 7*/
+select new_t.position, C.champion_name, new_t.kda
+from(
+    select P.position,P.champion_id,(sum(S.kills)+sum(S.assists))/sum(S.deaths) as kda
+    from participant as P, stat as S
+    where P.player_id = S.player_id
+    group by P.champion_id
+    order by kda
+)as new_t,champ as C
+group by new_t.position
