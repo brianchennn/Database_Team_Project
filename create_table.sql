@@ -7,7 +7,7 @@ load data local infile './champs.csv'
 into table champ
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\n'
+lines terminated by '\r\n'
 ignore 1 lines;
 
 create table match_info(
@@ -21,7 +21,7 @@ load data local infile './matches.csv'
 into table match_info
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\n'
+lines terminated by '\r\n'
 ignore 1 lines;
 
 
@@ -40,7 +40,7 @@ load data local infile './participants.csv'
 into table participant
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\n'
+lines terminated by '\r\n'
 ignore 1 lines;
 
 create table teamban(
@@ -55,7 +55,7 @@ load data local infile './teambans.csv'
 into table teamban
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\n'
+lines terminated by '\r\n'
 ignore 1 lines;
 
 create table stat(
@@ -75,13 +75,16 @@ create table stat(
     triplekills tinyint,
     quadrakills tinyint,
     pentakills tinyint,
+    legendarykills tinyint,
+    goldearned mediumint,
+    firstblood boolean,
     primary key(player_id)
 );
 load data local infile './stats.csv'
 into table stat
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\n'
+lines terminated by '\r\n'
 ignore 1 lines;
 
 
