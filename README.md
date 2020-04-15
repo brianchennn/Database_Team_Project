@@ -25,6 +25,3 @@ $ git pull origin master --rebase
 $git pull origin master -f
 ```
 ###HW1作業專區
-1~10作業
-6,7答案有錯 我也懶得再把螢幕轉直了 
-
