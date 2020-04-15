@@ -1,1 +1,0 @@
-# DBMS20_examples
