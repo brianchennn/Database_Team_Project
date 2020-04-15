@@ -6,7 +6,7 @@ select count(ver) as cnt
 from (select distinct substring_index(version,'.',2) as ver from match_info ) as tmp;
 
 /*question 3*/
-select C.champion_name as c_n,count(P.match_id) as cnt
+select C.champion_name as champion_name,count(P.match_id) as cnt
 from champ as C, (select PP.match_id,PP.champion_id from participant as PP where PP.position="JUNGLE") as P
 where C.champion_id = P.champion_id
 group by P.champion_id 
@@ -30,6 +30,7 @@ from(
     order by P.match_id desc
 ) as new_t
 group by new_t.win;
+
 /*question 6 */
 select T1.position,C.champion_name
 from(
@@ -37,21 +38,22 @@ from(
     from(select P.position,P.champion_id,count(*) cnt
         from participant as P, match_info as M
         where M.duration between 2400 and 3000 and P.match_id=M.match_id
-        group by P.champion_id desc 
-        order by cnt
+        group by P.position ,P.champion_id  
+        order by cnt desc
     )as t1
     group by t1.position
 )as T1,
 (
     select P.position,P.champion_id,count(*) cnt
     from participant as P, match_info as M
-    where M.duration between 2400 and 3000 and P.match_id=M.match_id
-    group by P.champion_id desc 
-    order by cnt
+    where M.duration between 2400 and 3000 and P.match_id=M.match_id 
+    group by P.position ,P.champion_id  
+    order by cnt desc
 )as T2,
 champ as C
-where T1.position=T2.position and T1.max_cnt=T2.cnt and C.champion_id=T2.champion_id and T1.position != "DUO"
+where T1.position=T2.position and T1.max_cnt=T2.cnt and C.champion_id=T2.champion_id and T1.position != "DUO" and T1.position != "SOLO" and T1.position != "NONE" 
 order by T1.position;
+
 /*question 7*/
 select new2_t.position, C.champion_name, new2_t.kda
 from(
@@ -60,14 +62,15 @@ from(
         select P.position,P.champion_id,(sum(S.kills)+sum(S.assists))/sum(S.deaths) as kda
         from participant as P, stat as S
         where P.player_id = S.player_id
-        group by P.champion_id
+        group by P.position,P.champion_id
         order by kda desc
     )as new_t
-    where new_t.position != 'DUO'
+    where new_t.position != 'DUO' and new_t.position != 'SOLO' and new_t.position != 'NONE'
     group by new_t.position
 )as new2_t, champ as C
 where C.champion_id = new2_t.champion_id
 order by new2_t.position asc;
+
 
 
 /*question 8*/
@@ -82,6 +85,7 @@ where C.champion_name not in(
         )as new_t, champ as C
         where new_t.champion_id = C.champion_id)
 order by C.champion_name asc;
+
 /*question 9     Teemo:17, Lee_Sin:64*/
 
 select substring_index(M.version,'.',2)as version,sum(new_t.win) as win_cnt,count(win)-sum(win) as lose_cnt, sum(new_t.win)/count(win) as win_ratio
@@ -134,13 +138,22 @@ group by T.self_name
 having count(*) > 100
 order by win_ratio DESC
 limit 5;
-
 /*question 11*/
 
 
-select  sum(S.win)/count(S.win) as win_rate
+select  P.ss1,P.ss2,sum(S.win)/count(S.win) as win_rate ,sum(S.win) as n
 from stat as S,participant as P
 where S.player_id=P.player_id and P.ss1='Flash' and P.ss2='Ignite'and P.position='TOP';
-select  sum(S.win)/count(S.win) as win_rate
+select  P.ss1,P.ss2,sum(S.win)/count(S.win) as win_rate,sum(S.win) as n
 from stat as S,participant as P
 where S.player_id=P.player_id and P.ss1='Flash' and P.ss2='Teleport' and P.position='TOP';
+
+/*question 12*/
+select t1.total_triplekills as tri_kill_num, sum(t1.win)/count(t1.win) as win_ratio
+from(select P.match_id, if(P.player>=6,'R','B'),S.player_id, sum(S.doublekills) as total_doublekills,sum(S.triplekills) as total_triplekills, S.win
+    from stat as S,participant as P
+    where P.player_id = S.player_id 
+    group by P.match_id,P.player
+    having total_triplekills > 0) as t1
+group by t1.total_triplekills;
+
