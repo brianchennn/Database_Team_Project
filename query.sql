@@ -84,7 +84,7 @@ where C.champion_name not in(
 order by C.champion_name asc;
 /*question 9     Teemo:17, Lee_Sin:64*/
 
-select substring_index(M.version,'.',2)as version,sum(new_t.win) as win_cnt,count(win)-sum(win) as lose_int, sum(new_t.win)/count(win)
+select substring_index(M.version,'.',2)as version,sum(new_t.win) as win_cnt,count(win)-sum(win) as lose_cnt, sum(new_t.win)/count(win) as win_ratio
 from(
         select PP.player_id,PP.player,PP.match_id, PP.Team,S.win    
         from(
@@ -135,4 +135,12 @@ having count(*) > 100
 order by win_ratio DESC
 limit 5;
 
+/*question 11*/
 
+
+select  sum(S.win)/count(S.win) as win_rate
+from stat as S,participant as P
+where S.player_id=P.player_id and P.ss1='Flash' and P.ss2='Ignite'and P.position='TOP';
+select  sum(S.win)/count(S.win) as win_rate
+from stat as S,participant as P
+where S.player_id=P.player_id and P.ss1='Flash' and P.ss2='Teleport' and P.position='TOP';
