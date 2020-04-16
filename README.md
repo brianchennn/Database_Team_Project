@@ -25,6 +25,3 @@ $ git pull origin master --rebase
 $git pull origin master -f
 ```
 ###HW1作業專區
-1~10作業
-![image](https://github.com/brianchennn/Database_Team_Project/blob/master/%E7%AD%94%E6%A1%88%E6%88%AA%E5%9C%96.png?raw=true)
-
