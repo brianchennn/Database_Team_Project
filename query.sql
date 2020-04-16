@@ -104,7 +104,7 @@ from(
 
         ) as PP,stat as S
         where PP.player_id = S.player_id
-        group by PP.match_id,PP.Team 
+        group by PP.match_id,PP.Team,S.win 
         HAVING  sum(PP.champion_id)=81
     )as new_t ,match_info as M
 where M.match_id = new_t.match_id  
@@ -162,4 +162,5 @@ from(select P.match_id, if(P.player>=6,'R','B'),S.player_id, sum(S.doublekills) 
     group by P.match_id,P.player
     having total_triplekills > 0) as t1
 group by t1.total_triplekills;
+
 
