@@ -96,7 +96,7 @@ order by C.champion_name asc;
 
 select substring_index(M.version,'.',2)as version,sum(new_t.win) as win_cnt,count(win)-sum(win) as lose_cnt, sum(new_t.win)/count(win) as win_ratio
 from(
-        select PP.player_id,PP.player,PP.match_id, PP.Team,S.win    
+        select PP.match_id, PP.Team,S.win    
         from(
             select P.player_id,P.match_id,P.champion_id,P.player, if(P.player>=6,'R','B') as Team
             from participant as P 
