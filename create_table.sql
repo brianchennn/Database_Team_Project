@@ -63,29 +63,14 @@ lines terminated by '\r\n'
 ignore 1 lines;
 
 create table player_names(
-    player_id int NOT NULL,
-    win boolean,
-    item1 smallint,
-    item2 smallint,
-    item3 smallint,
-    item4 smallint,
-    item5 smallint,
-    item6 smallint,
-    kills tinyint,
-    deaths tinyint,
-    assists tinyint,
-    longesttimespentliving smallint,
-    doublekills tinyint,
-    triplekills tinyint,
-    quadrakills tinyint,
-    pentakills tinyint,
-    legendarykills tinyint,
-    goldearned mediumint,
-    firstblood boolean,
-    primary key(player_id)
+    id varchar(6) NOT NULL,
+    first_name varchar(30) NOT NULL,
+	last_name varchar(30) NOT NULL,
+    primary key(id)
 );
+
 load data local infile './player_names.csv'
-into table stat
+into table player_names
 fields terminated by ','
 enclosed by '"'
 lines terminated by '\r\n'
