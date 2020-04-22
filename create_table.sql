@@ -48,15 +48,42 @@ lines terminated by '\r\n'
 ignore 1 lines;
 
 create table pitches(
-    match_id int NOT NULL,
-    team char(1) NOT NULL,
-    champion_id int NOT NULL,
-    banturn tinyint NOT NULL,
-    primary key (match_id, banturn)
+    ax float,
+	ay float,
+	az float,
+	sz_bot float,
+	sz_top float,
+	type_confidence float,
+	vx0 float,
+	vy0 float,
+	vz0 float,
+	x float,
+	x0 float,
+	y float,
+	y0 float,
+	z0 float,
+	pfx_x float,
+	pfx_z float,
+	nasty tinyint,
+	zone tinyint,
+	code varchar(2),
+	type varchar(2),
+	pitch_type varchar(2),
+	event_num int,
+	b_score tinyint,
+	ab_id varchar(10) NOt NULL,
+	b_count tinyint,
+	s_count tinyint,
+	outs tinyint,
+	pitch_num tinyint NOT NULL,
+	on_1b boolean,
+	on_2b boolean,
+	on_3b boolean,
+    primary key (ab_id, pitch_num)
 );
 
 load data local infile './pitches.csv'
-into table teamban
+into table pitches
 fields terminated by ','
 enclosed by '"'
 lines terminated by '\r\n'
