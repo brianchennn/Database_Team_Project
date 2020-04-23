@@ -38,11 +38,28 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
 
-CREATE TABLE games(
-    
+CREATE TABLE games (
+    attendance INT,
+    away_final_score TINYINT,
+    away_team CHAR(5),
+    date DATE,
+    elapsed_time SMALLINT,
+    g_id CHAR(11),
+    home_final_score TINYINT,
+    home_team CHAR(5),
+    start_time VARCHAR(10),
+    umpire_1B VARCHAR(40),
+    umpire_2B VARCHAR(40),
+    umpire_3B VARCHAR(40),
+    umpire_HP VARCHAR(40),
+    venue_name VARCHAR(40),
+    weather VARCHAR(40),
+    wind VARCHAR(40),
+    delay SMALLINT,
+    PRIMARY KEY (g_id)
 );
 LOAD DATA LOCAL INFILE './games.csv'
-INTO TABLE participant
+INTO TABLE games
 FIELDS TERMINATED by ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
