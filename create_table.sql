@@ -16,7 +16,7 @@ load data local infile './atbats.csv'
 into table atbats
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\r\n'
+lines terminated by '\n'
 ignore 1 lines;
 
 create table ejections(
@@ -33,7 +33,7 @@ load data local infile './ejections.csv'
 into table ejections
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\r\n'
+lines terminated by '\n'
 ignore 1 lines;
 
 
@@ -44,7 +44,7 @@ load data local infile './games.csv'
 into table participant
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\r\n'
+lines terminated by '\n'
 ignore 1 lines;
 
 create table pitches(
@@ -92,7 +92,7 @@ load data local infile './pitches.csv'
 into table pitches
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\r\n'
+lines terminated by '\n'
 ignore 1 lines;
 
 create table player_names(
@@ -106,7 +106,7 @@ load data local infile './player_names.csv'
 into table player_names
 fields terminated by ','
 enclosed by '"'
-lines terminated by '\r\n'
+lines terminated by '\n'
 ignore 1 lines;
 
 
