@@ -20,31 +20,6 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-CREATE TABLE ejections(
-    ab_id CHAR(12) NOT NULL,
-    des VARCHAR(100) NOT NULL,
-    event_num INT NOT NULL,
-    g_id CHAR(11) NOT NULL,
-    player_id CHAR(8) NOT NULL,
-    date CHAR(10) NOT NULL,
-    BS CHAR(3),
-    CORRECT CHAR(4) DEFAULT NULL,
-    team CHAR(5) NOT NULL,
-    is_home_team CHAR(7) NOT NULL,
-    PRIMARY KEY (des),
-    /*FOREIGN KEY (ab_id) REFERENCES atbats,
-    FOREIGN KEY (g_id) REFERENCES games,
-    FOREIGN KEY (player_id) REFERENCES player_names*/
-);
-
-LOAD DATA LOCAL INFILE './ejections.csv'
-INTO TABLE ejections
-FIELDS TERMINATED by ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 LINES;
-
-
 CREATE TABLE games (
     attendance INT,
     away_final_score TINYINT,
@@ -137,4 +112,26 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
+CREATE TABLE ejections(
+    ab_id CHAR(12) NOT NULL,
+    des VARCHAR(100) NOT NULL,
+    event_num INT NOT NULL,
+    g_id CHAR(11) NOT NULL,
+    player_id CHAR(8) NOT NULL,
+    date CHAR(10) NOT NULL,
+    BS CHAR(3),
+    CORRECT CHAR(4) DEFAULT NULL,
+    team CHAR(5) NOT NULL,
+    is_home_team CHAR(7) NOT NULL,
+    PRIMARY KEY (des),                                      /* There's data that have same des value, and it'll be skipped if we use des as PRIMARY KEY. */
+    FOREIGN KEY (ab_id) REFERENCES atbats (ab_id),          /* The REFERENCE column of FOREIGN KEY needs to be specify too, */
+    FOREIGN KEY (g_id) REFERENCES games (g_id),             /* and since it has to be a existing column, so its TABLE should be created first (before CREATE FOREIGN KEY's TABLE). */
+    FOREIGN KEY (player_id) REFERENCES player_names (id)    /* And there might be data got skipped because it's inconsistent with FOREIGN KEY (over 300 I guess), */
+);                                                          /* so we should use the FOREIGN KEY carefully, or is it exactly what you want? */
 
+LOAD DATA LOCAL INFILE './ejections.csv'
+INTO TABLE ejections
+FIELDS TERMINATED by ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
