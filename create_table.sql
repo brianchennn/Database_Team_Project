@@ -48,6 +48,12 @@ lines terminated by '\r\n'
 ignore 1 lines;
 
 create table pitches(
+    px float,
+    pz float,
+    start_speed float,
+    end_speed float,
+    spin_rate float,
+    spin_dir float,
     ax float,
     ay float,
     az float,
