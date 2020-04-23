@@ -21,15 +21,22 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
 CREATE TABLE ejections(
-    date date NOT NULL,
-    BS VARCHAR(1),
-    des VARCHAR(300) PRIMARY KEY,
-    event_num INT,
-    CORRECT VARCHAR(1),
-    team carchar(3),
-    is_home_team boolean,
-    primary key (des)
+    ab_id CHAR(12) NOT NULL,
+    des VARCHAR(100) NOT NULL,
+    event_num INT NOT NULL,
+    g_id CHAR(11) NOT NULL,
+    player_id CHAR(8) NOT NULL,
+    date CHAR(10) NOT NULL,
+    BS CHAR(3),
+    CORRECT CHAR(4) DEFAULT NULL,
+    team CHAR(5) NOT NULL,
+    is_home_team CHAR(7) NOT NULL,
+    PRIMARY KEY (des),
+    FOREIGN KEY (ab_id) REFERENCES atbats,
+    FOREIGN KEY (g_id) REFERENCES games,
+    FOREIGN KEY (player_id) REFERENCES player_names
 );
+
 LOAD DATA LOCAL INFILE './ejections.csv'
 INTO TABLE ejections
 FIELDS TERMINATED by ','
