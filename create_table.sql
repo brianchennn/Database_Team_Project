@@ -32,9 +32,9 @@ CREATE TABLE ejections(
     team CHAR(5) NOT NULL,
     is_home_team CHAR(7) NOT NULL,
     PRIMARY KEY (des),
-    FOREIGN KEY (ab_id) REFERENCES atbats,
+    /*FOREIGN KEY (ab_id) REFERENCES atbats,
     FOREIGN KEY (g_id) REFERENCES games,
-    FOREIGN KEY (player_id) REFERENCES player_names
+    FOREIGN KEY (player_id) REFERENCES player_names*/
 );
 
 LOAD DATA LOCAL INFILE './ejections.csv'
