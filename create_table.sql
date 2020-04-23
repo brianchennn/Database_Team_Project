@@ -72,6 +72,9 @@ CREATE TABLE pitches(
     end_speed FLOAT,
     spin_rate FLOAT,
     spin_dir FLOAT,
+    break_angle FLOAT,
+    break_length FLOAT,
+    break_y FLOAT,
     ax FLOAT,
     ay FLOAT,
     az FLOAT,
@@ -90,7 +93,7 @@ CREATE TABLE pitches(
     pfx_z FLOAT,
     nasty tinyINT,
     zone tinyINT,
-    code VARCHAR(2),
+    code VARCHAR(2) ,
     type VARCHAR(2),
     pitch_type VARCHAR(2),
     event_num INT,
@@ -100,9 +103,9 @@ CREATE TABLE pitches(
     s_count tinyINT,
     outs tinyINT,
     pitch_num tinyINT NOT NULL,
-    on_1b boolean,
-    on_2b boolean,
-    on_3b boolean,
+    on_1b FLOAT,
+    on_2b FLOAT,
+    on_3b FLOAT ,
     primary key (ab_id, pitch_num)
 );
 
