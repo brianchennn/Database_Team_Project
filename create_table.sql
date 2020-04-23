@@ -1,112 +1,113 @@
-create table atbats(
-    ab_id varchar(10) not null,
-    batter_id varchar(6) NOT NULL,
-    event varchar(30),
-    g_id varchar(9) not null,
-    inning int not null,
-    o int not null,
-    p_score int not null,
-    p_throws varchar(1) not null,
-    pitcher_id varchar(6) not null,
-    stand varchar(1) not null,
-    top boolean not null,
-    primary key (ab_id)
+CREATE TABLE atbats(
+    ab_id CHAR(12) NOT NULL, 
+    batter_id CHAR(8) NOT NULL,
+    event VARCHAR(20) NOT NULL, 
+    g_id CHAR(11) NOT NULL,
+    inning TINYINT NOT NULL,
+    o TINYINT NOT NULL,
+    p_score TINYINT NOT NULL,
+    p_throws VARCHAR(1) NOT NULL,
+    pitcher_id CHAR(8) NOT NULL,
+    stand CHAR(1) NOT NULL,
+    top CHAR(7) NOT NULL,
+    PRIMARY KEY (ab_id)
 );
-load data local infile './atbats.csv'
-into table atbats
-fields terminated by ','
-enclosed by '"'
-lines terminated by '\n'
-ignore 1 lines;
 
-create table ejections(
-    date  date NOT NULL,
-    BS varchar(1),
-    des varchar(300),
-    event_num int,
-    CORRECT varchar(1),
+LOAD DATA LOCAL INFILE './atbats.csv'
+INTO TABLE atbats
+FIELDS TERMINATED by ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+CREATE TABLE ejections(
+    date date NOT NULL,
+    BS VARCHAR(1),
+    des VARCHAR(300) PRIMARY KEY,
+    event_num INT,
+    CORRECT VARCHAR(1),
     team carchar(3),
     is_home_team boolean,
-    primary key (match_id)
+    primary key (des)
 );
-load data local infile './ejections.csv'
-into table ejections
-fields terminated by ','
-enclosed by '"'
-lines terminated by '\n'
-ignore 1 lines;
+LOAD DATA LOCAL INFILE './ejections.csv'
+INTO TABLE ejections
+FIELDS TERMINATED by ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
 
 
-create table games(
+CREATE TABLE games(
     
 );
-load data local infile './games.csv'
-into table participant
-fields terminated by ','
-enclosed by '"'
-lines terminated by '\n'
-ignore 1 lines;
+LOAD DATA LOCAL INFILE './games.csv'
+INTO TABLE participant
+FIELDS TERMINATED by ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
 
-create table pitches(
-    px float,
-    pz float,
-    start_speed float,
-    end_speed float,
-    spin_rate float,
-    spin_dir float,
-    ax float,
-    ay float,
-    az float,
-    sz_bot float,
-    sz_top float,
-    type_confidence float,
-    vx0 float,
-    vy0 float,
-    vz0 float,
-    x float,
-    x0 float,
-    y float,
-    y0 float,
-    z0 float,
-    pfx_x float,
-    pfx_z float,
-    nasty tinyint,
-    zone tinyint,
-    code varchar(2),
-    type varchar(2),
-    pitch_type varchar(2),
-    event_num int,
-    b_score tinyint,
-    ab_id varchar(10) NOt NULL,
-    b_count tinyint,
-    s_count tinyint,
-    outs tinyint,
-    pitch_num tinyint NOT NULL,
+CREATE TABLE pitches(
+    px FLOAT,
+    pz FLOAT,
+    start_speed FLOAT,
+    end_speed FLOAT,
+    spin_rate FLOAT,
+    spin_dir FLOAT,
+    ax FLOAT,
+    ay FLOAT,
+    az FLOAT,
+    sz_bot FLOAT,
+    sz_top FLOAT,
+    type_confidence FLOAT,
+    vx0 FLOAT,
+    vy0 FLOAT,
+    vz0 FLOAT,
+    x FLOAT,
+    x0 FLOAT,
+    y FLOAT,
+    y0 FLOAT,
+    z0 FLOAT,
+    pfx_x FLOAT,
+    pfx_z FLOAT,
+    nasty tinyINT,
+    zone tinyINT,
+    code VARCHAR(2),
+    type VARCHAR(2),
+    pitch_type VARCHAR(2),
+    event_num INT,
+    b_score tinyINT,
+    ab_id VARCHAR(10) NOT NULL,
+    b_count tinyINT,
+    s_count tinyINT,
+    outs tinyINT,
+    pitch_num tinyINT NOT NULL,
     on_1b boolean,
     on_2b boolean,
     on_3b boolean,
     primary key (ab_id, pitch_num)
 );
 
-load data local infile './pitches.csv'
-into table pitches
-fields terminated by ','
-enclosed by '"'
-lines terminated by '\n'
-ignore 1 lines;
+LOAD DATA LOCAL INFILE './pitches.csv'
+INTO TABLE pitches
+FIELDS TERMINATED by ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
 
-create table player_names(
-    id varchar(6) NOT NULL,
-    first_name varchar(30) NOT NULL,
-    last_name varchar(30) NOT NULL,
+CREATE TABLE player_names(
+    id VARCHAR(6) NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
     primary key(id)
 );
 
-load data local infile './player_names.csv'
-into table player_names
-fields terminated by ','
-enclosed by '"'
-lines terminated by '\n'
-ignore 1 lines;
+LOAD DATA LOCAL INFILE './player_names.csv'
+INTO TABLE player_names
+FIELDS TERMINATED by ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
 
 
