@@ -5,12 +5,12 @@
 #### *大檔案傳輸方法*
 去 [lfs官網](https://git-lfs.github.com/)下載(mac/linux是這樣 windows我不知道 (求補充))
 ```
-$ git lfs install
-$ git lfs track "*.csv"
-$ git add .gitattributes 
-$ git add file.psd
-$ git commit -m "Add design file"
-$ git push origin master
+ git lfs install
+ git lfs track "*.csv"
+ git add .gitattributes 
+ git add file.psd
+ git commit -m "Add design file"
+ git push origin master
 ```
 #### *git push 不上去的解決方法*
 有可能是其他貢獻者commit上去了 你的本地版本落後github 的版本
