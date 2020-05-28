@@ -12,6 +12,8 @@
  git commit -m "Add design file"
  git push origin master
 ```
+補：windows 直接去官網載就好 (2020.5.28)
+
 #### *git push 不上去的解決方法*
 有可能是其他貢獻者commit上去了 你的本地版本落後github 的版本
 
