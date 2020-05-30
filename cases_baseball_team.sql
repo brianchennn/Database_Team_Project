@@ -7,7 +7,7 @@ from(
 	from(
 		select G.g_id, substring_index(G.date, "-", 1) as year
 		from games as G
-		where G.home_team like "***%")as home, atbats as A
+		where G.home_team like "bos")as home, atbats as A
 	where home.g_id = A.g_id
 		and A.inning = 2
 		and A.top like "TRUE%"
@@ -17,7 +17,7 @@ from(
 	from(
 		select G.g_id, substring_index(G.date, "-", 1) as year
 		from games as G
-		where G.away_team like "***%")as away, atbats as A
+		where G.away_team like "bos")as away, atbats as A
 	where away.g_id = A.g_id
 		and A.inning = 1
 		and A.top like "FALSE%"
@@ -27,11 +27,11 @@ group by score.year;
 /*球隊case 3*/
 select ("home") as home_or_away, G.away_team as opponent, G.home_final_score as score, G.away_final_score as opponent_score
 from games as G
-where G.home_team like "***%"
+where G.home_team like "nya"
 union
 select ("away") as home_or_away, G.home_team as opponent, G.away_final_score as score, G.home_final_score as opponent_score
 from games as G
-where G.away_team like "***%";
+where G.away_team like "nya";
 
 /*球隊case 5 球隊*/
 select max_cnt.year, T.team, max_cnt.cnt
@@ -60,7 +60,7 @@ from (
 			select substring_index(E.date, "/", -1) as year, E.player_id from ejections as E) as temp
 			group by temp.player_id, temp.year) as T
 		group by T.year) as max_cnt,(
-		select temp.player_id, temp.year, count(*) as cnt
+	select temp.player_id, temp.year, count(*) as cnt
 		from (
 			select substring_index(E.date, "/", -1) as year, E.player_id from ejections as E) as temp
 		group by temp.player_id, temp.year) as T,
@@ -69,8 +69,8 @@ where max_cnt.year = T.year and max_cnt.cnt = T.cnt and P.id = T.player_id;
 
 /*球隊case 6 球隊*/
 select *
-from ejections
-where E.team like "***%"
+from ejections as E
+where E.team like "nya"
 
 /*球隊case 6 球員*/
 select E.*
