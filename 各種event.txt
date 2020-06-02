@@ -1,0 +1,32 @@
++----------------------+    打數 
+| Groundout            |     v
+| Double               |	v
+| Single               |	v
+| Strikeout            |	v	
+| Walk                 |	x
+| Runner Out           |	v
+| Flyout               |	v
+| Forceout             |	v
+| Pop Out              |	v
+| Intent Walk          |	x
+| Lineout              |
+| Home Run             |
+| Triple               |
+| Hit By Pitch         |
+| Grounded Into DP     |
+| Sac Bunt             |
+| Fielders Choice      |
+| Bunt Groundout       |
+| Field Error          |
+| Double Play          |
+| Sac Fly              |	x
+| Fielders Choice Out  |	
+| Bunt Pop Out         |
+| Catcher Interference |	x
+| Strikeout - DP       |
+| Batter Interference  |	
+| Sac Fly DP           |
+| Bunt Lineout         |
+| Sacrifice Bunt DP    |
+| Triple Play          |
++----------------------+
