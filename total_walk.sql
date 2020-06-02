@@ -9,8 +9,8 @@ FROM
         atbats AS a
     WHERE
         a.event = 'Walk'
-	) AS Strikeout,
+	) AS Walk,
     player_names
 WHERE
-    player_names.id = Strikeout.pitcher_id
+    player_names.id = Walk.pitcher_id
 GROUP BY player_names.first_name , player_names.last_name;
