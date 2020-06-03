@@ -23,7 +23,7 @@ FROM
     FROM
         atbats AS a
     WHERE
-        a.event = "Single" or a.event = "Double" or a.event = "Triple"
+        a.event = "Single" or a.event = "Double" or a.event = "Triple" or a.event="Home Run"
 	group by years, a.pitcher_id
 	) AS H,
     
@@ -48,4 +48,6 @@ FROM
 WHERE
     player_names.id = H.pitcher_id
         AND player_names.id = Walk.pitcher_id and H.years = Walk.years
-        AND player_names.id = inning.pitcher_id and inning.years = H.years;
+        AND player_names.id = inning.pitcher_id and inning.years = H.years
+        and total_innings >= 50
+order by years, WHIP;

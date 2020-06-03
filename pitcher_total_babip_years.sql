@@ -1,3 +1,4 @@
+create table pitcher_total_babip_years(
 SELECT 
 	GO.years as years,
     player_names.first_name,
@@ -14,7 +15,7 @@ FROM
     FROM
         atbats AS a
     WHERE
-        a.event = "Single" or a.event = "Double" or a.event = "Triple"
+        a.event = "Single" or a.event = "Double" or a.event = "Triple" or a.event = "Home Run"
 	group by years, a.pitcher_id
 	) AS H,
     
@@ -48,4 +49,7 @@ WHERE
     player_names.id = H.pitcher_id
         AND player_names.id = GO.pitcher_id and H.years = GO.years
         AND player_names.id = HR.pitcher_id and HR.years = H.years
-        AND player_names.id = FO.pitcher_id and FO.years = H.years;
+        AND player_names.id = FO.pitcher_id and FO.years = H.years
+        and flyout + groundout + hits - home_run >= 50
+order by years asc, BABIP asc
+);
