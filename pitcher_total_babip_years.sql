@@ -1,11 +1,12 @@
 SELECT 
-	FO.years as years,
+	GO.years as years,
     player_names.first_name,
     player_names.last_name,
     hits,
     home_run,
-    atbat_or_other,
-    (hits + home_run)/atbat_or_other as AVG
+    flyout,
+    groundout,
+    (hits - home_run)/(flyout + groundout + hits - home_run) as BABIP
 FROM
     player_names,
     (SELECT 
@@ -27,21 +28,24 @@ FROM
 	) AS HR,
     
     (SELECT 
-        SUBSTRING(a.ab_id, 1, 4) AS years, a.pitcher_id, count(a.event) as atbat_or_other
+        SUBSTRING(a.ab_id, 1, 4) AS years, a.pitcher_id, count(a.event) as flyout
     FROM
         atbats AS a
     WHERE
-        (a.event != "Walk" 
-            and a.event!="Sac Fly" 
-            and a.event!="Sac Bunt" 
-            and a.event != "Hit By Pitch" 
-            and a.event!="Catcher Interference" 
-            and a.event!="Intent Walk")
+        a.event = "Flyout"
 	group by years, a.pitcher_id
-	) AS FO
+	) AS FO,
+    
+    (SELECT 
+        SUBSTRING(a.ab_id, 1, 4) AS years, a.pitcher_id, count(a.event) as groundout
+    FROM
+        atbats AS a
+    WHERE
+        a.event = "Groundout"
+	group by years, a.pitcher_id
+	) AS GO
 WHERE
     player_names.id = H.pitcher_id
+        AND player_names.id = GO.pitcher_id and H.years = GO.years
         AND player_names.id = HR.pitcher_id and HR.years = H.years
-        AND player_names.id = FO.pitcher_id and FO.years = H.years
-        and atbat_or_other >= 50
-order by FO.years, AVG asc
+        AND player_names.id = FO.pitcher_id and FO.years = H.years;
