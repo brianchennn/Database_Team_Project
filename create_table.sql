@@ -123,12 +123,11 @@ CREATE TABLE ejections(
     CORRECT CHAR(4) DEFAULT NULL,
     team CHAR(5) NOT NULL,
     is_home_team CHAR(7) NOT NULL,
-    PRIMARY KEY (des),                                      /* There's data that have same des value, and it'll be skipped if we use des as PRIMARY KEY. */
-    FOREIGN KEY (ab_id) REFERENCES atbats (ab_id),          /* The REFERENCE column of FOREIGN KEY needs to be specify too, */
-    FOREIGN KEY (g_id) REFERENCES games (g_id),             /* and since it has to be a existing column, so its TABLE should be created first (before CREATE FOREIGN KEY's TABLE). */
-    FOREIGN KEY (player_id) REFERENCES player_names (id)    /* And there might be data got skipped because it's inconsistent with FOREIGN KEY (over 300 I guess), */
-);                                                          /* so we should use the FOREIGN KEY carefully, or is it exactly what you want? */
-
+    PRIMARY KEY (des)                                      
+    /*FOREIGN KEY (ab_id) REFERENCES atbats (ab_id),          
+    //FOREIGN KEY (g_id) REFERENCES games (g_id),            
+    //FOREIGN KEY (player_id) REFERENCES player_names (id)    */
+);                                                         
 LOAD DATA LOCAL INFILE './ejections.csv'
 INTO TABLE ejections
 FIELDS TERMINATED by ','

@@ -1,3 +1,4 @@
+create table ff_Velocity_avg(
 select
 	player_names.first_name,
     player_names.last_name,
@@ -15,4 +16,5 @@ from
     ) as FF
 
 where player_names.id = atbat.pitcher_id and atbat.ab_id = FF.ab_id
-group by player_names.first_name , player_names.last_name;
+group by player_names.first_name , player_names.last_name
+);

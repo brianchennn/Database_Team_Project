@@ -9,10 +9,10 @@ select list.year, list.team,
 		when "ari" then "NL" when "col" then "NL" when "lan" then "NL" when "sdn" then "NL" when "sfn" then "NL" END) as League,
 	(case list.team when "bal" then "East" when "bos" then "East" when "nya" then "East" when "tba" then "East" when "tor" then "East"
 		when "cha" then "Central" when "cle" then "Central" when "det" then "Central" when "kca" then "Central" when "min" then "Central"
-		when "hou" then "west" when "ana" then "west" when "oak" then "west" when "sea" then "west" when "tex" then "west" 
+		when "hou" then "West" when "ana" then "West" when "oak" then "West" when "sea" then "West" when "tex" then "West" 
 		when "atl" then "East" when "mia" then "East" when "nyn" then "East" when "phi" then "East" when "was" then "East"
 		when "chn" then "Central" when "cin" then "Central" when "mil" then "Central" when "pit" then "Central" when "sln" then "Central"
-		when "ari" then "west" when "col" then "west" when "lan" then "west" when "sdn" then "west" when "sfn" then "west" END) as Division,
+		when "ari" then "West" when "col" then "West" when "lan" then "West" when "sdn" then "West" when "sfn" then "West" END) as Division,
 	sum(list.win_lose) as win, count(list.win_lose) as total, sum(list.win_lose)/count(list.win_lose) as win_rate
 from (
 	select G.home_team as team, if(G.home_final_score > G.away_final_score, 1, 0) as win_lose, substring_index(G.date, "-", 1) as year, G.g_id
@@ -61,10 +61,10 @@ select list.year, list.team,
 		when "ari" then "NL" when "col" then "NL" when "lan" then "NL" when "sdn" then "NL" when "sfn" then "NL" END) as League,
 	(case list.team when "bal" then "East" when "bos" then "East" when "nya" then "East" when "tba" then "East" when "tor" then "East"
 		when "cha" then "Central" when "cle" then "Central" when "det" then "Central" when "kca" then "Central" when "min" then "Central"
-		when "hou" then "west" when "ana" then "west" when "oak" then "west" when "sea" then "west" when "tex" then "west" 
+		when "hou" then "West" when "ana" then "West" when "oak" then "West" when "sea" then "West" when "tex" then "West" 
 		when "atl" then "East" when "mia" then "East" when "nyn" then "East" when "phi" then "East" when "was" then "East"
 		when "chn" then "Central" when "cin" then "Central" when "mil" then "Central" when "pit" then "Central" when "sln" then "Central"
-		when "ari" then "west" when "col" then "west" when "lan" then "west" when "sdn" then "west" when "sfn" then "west" END) as Division,
+		when "ari" then "West" when "col" then "West" when "lan" then "West" when "sdn" then "West" when "sfn" then "West" END) as Division,
 	sum(list.win_lose) as win, count(list.win_lose) as total, sum(list.win_lose)/count(list.win_lose) as win_rate
 from (
 	select G.home_team as team, if(G.home_final_score > G.away_final_score, 1, 0) as win_lose, substring_index(G.date, "-", 1) as year, G.g_id
