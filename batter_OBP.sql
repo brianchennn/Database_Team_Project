@@ -1,4 +1,4 @@
-select T1.Year,T1.first_name,T1.last_name,sum(T2.cnt),count(T1.cnt),sum(T2.cnt)/sum(T1.cnt) as OPS
+/*select T1.Year,T1.first_name,T1.last_name,sum(T2.cnt),count(T1.cnt),sum(T2.cnt)/sum(T1.cnt) as OPS
 from(
     select substring(ab_id,1,4) as Year,first_name,last_name,event,count(*) as cnt
     from player_names,atbats 
@@ -21,7 +21,7 @@ from(
     where player_names.id = atbats.batter_id and event!="Catcher Interference" and event!="Batter Interference" and first_name like "%Xa%"
     group by Year ,first_name,last_name,event) as T1
 group by T1.Year,T1.first_name,T1.last_name
-
+*/
 
 select Year,first_name,last_name,sum(cnt_onbase),sum(cnt_atbat),sum(cnt_onbase)/sum(cnt_atbat) as OBP
 from(
