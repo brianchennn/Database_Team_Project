@@ -1,5 +1,5 @@
 
-select Year,first_name,last_name,sum(T1.cnt_baserun) as BB,sum(T1.cnt_atbat) as atbat,sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as BB_rate
+select Year,first_name,last_name,sum(T1.cnt_baserun) as BB,sum(T1.cnt_atbat) as PA,sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as BB_rate
 from(
     select substring(ab_id,1,4) as Year,first_name,last_name,event,
             if(event="Walk",count(*),0) as cnt_baserun, 
