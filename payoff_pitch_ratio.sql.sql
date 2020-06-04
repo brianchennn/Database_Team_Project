@@ -1,6 +1,6 @@
 /*投手進階 case2*/
 /*每年度, 2好球後各投手的球種使用比例及次數*/
-select pitch_type_cnt.year, N.first_name, N.last_name, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt, total.cnt as total, pitch_type_cnt.cnt/total.cnt as rate
+select pitch_type_cnt.year, N.first_name, N.last_name, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt, total.cnt as total, pitch_type_cnt.cnt/total.cnt as ratio
 from(
 	select substring(A.ab_id,1,4) as year, A.pitcher_id, sum(ab_cnt.cnt) as cnt
 	from(
