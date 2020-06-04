@@ -1,4 +1,5 @@
-SELECT 
+create table whip_years
+(SELECT 
 	H.years as years,
     player_names.first_name,
     player_names.last_name,
@@ -50,4 +51,5 @@ WHERE
         AND player_names.id = Walk.pitcher_id and H.years = Walk.years
         AND player_names.id = inning.pitcher_id and inning.years = H.years
         and total_innings >= 50
-order by years, WHIP;
+order by years, WHIP
+);

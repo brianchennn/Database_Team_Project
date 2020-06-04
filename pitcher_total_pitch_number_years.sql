@@ -1,4 +1,5 @@
-SELECT 
+create table pitcher_total_pitch_number_years
+(SELECT 
     SUBSTRING(PC.ab_id, 1, 4) AS years,
     player_names.first_name,
     player_names.last_name,
@@ -23,4 +24,5 @@ FROM
     player_names
 WHERE
     player_names.id = PC.pitcher_id
-GROUP BY years , player_names.first_name , player_names.last_name;
+GROUP BY years , player_names.first_name , player_names.last_name
+);

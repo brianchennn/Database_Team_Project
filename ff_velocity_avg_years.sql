@@ -1,4 +1,5 @@
-select
+create table ff_velocity_avg_years
+(select
 	SUBSTRING(atbat.ab_id, 1, 4) AS years,
 	player_names.first_name,
     player_names.last_name,
@@ -16,4 +17,5 @@ from
     ) as FF
 
 where player_names.id = atbat.pitcher_id and atbat.ab_id = FF.ab_id
-group by years, player_names.first_name , player_names.last_name;
+group by years, player_names.first_name , player_names.last_name
+);

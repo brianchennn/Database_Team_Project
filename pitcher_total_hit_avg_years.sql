@@ -1,4 +1,5 @@
-SELECT 
+create table pitcher_total_hit_avg_years
+(SELECT 
 	FO.years as years,
     player_names.first_name,
     player_names.last_name,
@@ -45,3 +46,4 @@ WHERE
         AND player_names.id = FO.pitcher_id and FO.years = H.years
         and atbat_or_other >= 50
 order by FO.years, AVG asc
+);
