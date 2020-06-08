@@ -39,14 +39,14 @@ where T_single.first_name = T_double.first_name and T_triple.first_name = T_doub
         and T_single.year_single = T_double.year_double and T_triple.year_triple = T_double.year_double and T_triple.year_triple = T_homerun.year_homerun
 group by T_single.year_single,T_single.first_name,T_single.last_name
 */
-
-select Year,first_name,last_name,sum(T1.cnt_baserun),sum(T1.cnt_atbat),sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as SLG
+create table batter_slg(
+select Year,first_name,id,last_name,sum(T1.cnt_baserun),sum(T1.cnt_atbat),sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as SLG
 from(
-    select substring(ab_id,1,4) as Year,first_name,last_name,event,if(event="Single",count(*),if(event="Double",2*count(*),if(event="Triple",3*count(*),if(event="Home Run",4*count(*),0)))) as cnt_baserun, count(*) as cnt_atbat
+    select substring(ab_id,1,4) as Year,id,first_name,last_name,event,if(event="Single",count(*),if(event="Double",2*count(*),if(event="Triple",3*count(*),if(event="Home Run",4*count(*),0)))) as cnt_baserun, count(*) as cnt_atbat
     from player_names,atbats 
     where player_names.id = atbats.batter_id 
         and (event != "Walk" and event!="Sac Fly" and event!="Sac Bunt" and event != "Hit By Pitch" and event!="Catcher Interference" and event!="Batter Interference" and event!="Intent Walk")
     group by substring(ab_id,1,4) ,first_name,last_name,event ) as T1 
 group by Year,first_name,last_name
 having sum(T1.cnt_atbat)>=50
-order by  Year asc,SLG desc
+order by  Year asc,SLG desc);
