@@ -1,6 +1,6 @@
 /*投手進階 case4*/
 /*每年度各球員四縫線快速球(FF)資訊*/
-select substring(A.ab_id,1,4) as year, N.first_name, N.last_name,
+select substring(A.ab_id,1,4) as year, N.id, N.first_name, N.last_name,
 	round(avg(f_cnt.start_speed),1) as ff_v0_avg, round(max(f_cnt.start_speed),1) as ff_v0_max,
 	round(avg(f_cnt.spin_rate),3) as ff_spin_rate_avg, round(max(f_cnt.spin_rate),3) as ff_spin_rate_max,
 	round(avg(f_cnt.velocity_delta),1) as ff_v_delta_avg, round(min(f_cnt.velocity_delta),1) as ff_v_delta_min

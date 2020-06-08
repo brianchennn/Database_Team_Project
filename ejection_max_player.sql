@@ -1,6 +1,6 @@
 /*球隊case 5*/
 /*每年度ejection次數最多的球員*/
-select max_cnt.year, P.first_name, P.last_name, max_cnt.cnt
+select max_cnt.year, P.id, P.first_name, P.last_name, max_cnt.cnt
 from (
 	select E_cnt.year, max(E_cnt.cnt) as cnt
 	from (
