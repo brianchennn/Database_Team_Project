@@ -1,6 +1,6 @@
 /*球隊case 1*/
 /*列出左投或右投對左打或右打的打擊率*/
-select cnt_baserun.year,
+CREATE TABLE LLRR select cnt_baserun.year,
 	(case cnt_baserun.pitcher_batter when "LL" then "Left_Left" when "LR" then "Left_Right" when "RL" then "Right_Left" when "RR" then "Right_Right" END) as pitcher_batter_stand
 	, sum(cnt_baserun.cnt) as cnt_baserun, sum(cnt_atbat.cnt) as cnt_atbat,sum(cnt_baserun.cnt)/sum(cnt_atbat.cnt) as AVG
 from (
