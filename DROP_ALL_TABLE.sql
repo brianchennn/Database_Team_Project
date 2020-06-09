@@ -11,8 +11,8 @@ DROP TABLE batter_strikeout;
 DROP TABLE batter_walk;
 DROP TABLE ejection_max_player;
 DROP TABLE ejection_team;
-DROP TABLE ff_Velocity_avg
-DROP TABLE ff_velocity_avg_years
+DROP TABLE ff_Velocity_avg;
+DROP TABLE ff_velocity_avg_years;
 DROP TABLE ff_velocity_max;
 DROP TABLE ff_velocity_max_years;
 DROP TABLE first_inning_run_ratio;
