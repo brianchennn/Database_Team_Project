@@ -1,6 +1,6 @@
 /*球隊case4*/
 /*所有年度, 所有聯盟分區的戰績*/
-select list.year, list.team,
+CREATE TABLE region_status select list.year, list.team,
 	(case list.team when "bal" then "AL" when "bos" then "AL" when "nya" then "AL" when "tba" then "AL" when "tor" then "AL"
 		when "cha" then "AL" when "cle" then "AL" when "det" then "AL" when "kca" then "AL" when "min" then "AL"
 		when "hou" then "AL" when "ana" then "AL" when "oak" then "AL" when "sea" then "AL" when "tex" then "AL" 
