@@ -13,7 +13,7 @@ order by  Year asc,SLG desc);
 create table batter_slg(
 SELECT 
     
-	_SG_.years as years,
+	_SG_.years as year,
     player_names.id,
     player_names.first_name,
     player_names.last_name,
@@ -78,5 +78,5 @@ WHERE
         AND _TP_.batter_id = _HR_.batter_id and _TP_.years = _HR_.years
         AND _HR_.batter_id = _AB_.batter_id and _HR_.years = _AB_.years
         and _AB_.atbat >= 50
-order by years asc, slg desc
+order by year asc, slg desc
 );

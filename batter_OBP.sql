@@ -24,7 +24,7 @@ group by T1.Year,T1.id,T1.id
 */
 
 
-create table batter_OBP(select Year,T1.id,first_name,last_name,sum(cnt_onbase),sum(cnt_atbat),sum(cnt_onbase)/sum(cnt_atbat) as OBP
+create table batter_OBP(select Year as year,T1.id,first_name,last_name,sum(cnt_onbase),sum(cnt_atbat),sum(cnt_onbase)/sum(cnt_atbat) as OBP
 
 
 from(
