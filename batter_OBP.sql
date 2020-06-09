@@ -23,7 +23,7 @@ from(
 group by T1.Year,T1.first_name,T1.last_name
 */
 
-create table batter_obp(select Year,T1.id,first_name,last_name,sum(cnt_onbase),sum(cnt_atbat),sum(cnt_onbase)/sum(cnt_atbat) as OBP
+create table batter_OBP(select Year,T1.id,first_name,last_name,sum(cnt_onbase),sum(cnt_atbat),sum(cnt_onbase)/sum(cnt_atbat) as OBP
 from(
     select substring(ab_id,1,4)as Year,id,first_name,last_name,event,if(event="Single",count(*),if(event="Double",count(*),if(event="Triple",count(*),if(event="Home Run",count(*),if(event = "Walk",count(*),if(event="Hit By Pitch",1,if(event="Catcher Interference",count(*),if(event="Intent Walk",count(*),0)))))))) as cnt_onbase, count(*) as cnt_atbat
     from player_names,atbats 
