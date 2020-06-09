@@ -17,11 +17,12 @@ SELECT
     player_names.id,
     player_names.first_name,
     player_names.last_name,
-    _SG_.single as "1B",
-    _DB_.doubl as "2B",
-    _TP_.triple as "3B",
-    _HR_.homerun as "HR",
-    _AB_.atbat as "AB"
+    _SG_.single as _1B,
+    _DB_.doubl as _2B,
+    _TP_.triple as _3B,
+    _HR_.homerun as _HR,
+    _AB_.atbat as _AB,
+    (_1B+_2B*2+_3B*3+_HR*4)/_AB as SLG
 FROM
     player_names,
     (SELECT 
