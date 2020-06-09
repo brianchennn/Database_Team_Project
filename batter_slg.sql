@@ -17,6 +17,7 @@ SELECT
     player_names.id,
     player_names.first_name,
     player_names.last_name,
+    _SG_.single +_DB_.doubl + _TP_.triple + _HR_.homerun as H,
     _SG_.single as _1B,
     _DB_.doubl as _2B,
     _TP_.triple as _3B,
