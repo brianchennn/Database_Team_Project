@@ -28,11 +28,11 @@ create table batter_OBP(select Year,T1.id,first_name,last_name,sum(cnt_onbase),s
 
 
 from(
-    select substring(ab_id,1,4)as Year,id,id,id,event,if(event="Single",count(*),if(event="Double",count(*),if(event="Triple",count(*),if(event="Home Run",count(*),if(event = "Walk",count(*),if(event="Hit By Pitch",1,if(event="Catcher Interference",count(*),if(event="Intent Walk",count(*),0)))))))) as cnt_onbase, count(*) as cnt_atbat
+    select substring(ab_id,1,4)as Year,id,event,if(event="Single",count(*),if(event="Double",count(*),if(event="Triple",count(*),if(event="Home Run",count(*),if(event = "Walk",count(*),if(event="Hit By Pitch",1,if(event="Catcher Interference",count(*),if(event="Intent Walk",count(*),0)))))))) as cnt_onbase, count(*) as cnt_atbat
     from player_names,atbats 
     where player_names.id = atbats.batter_id 
     and event!="Catcher Interference"
-    group by substring(ab_id,1,4) ,id,id,event) as T1 
-group by Year,id,id
+    group by substring(ab_id,1,4) ,id,event) as T1 
+group by Year,id
 having sum(cnt_atbat) >= 50
 order by  Year asc,OBP desc);

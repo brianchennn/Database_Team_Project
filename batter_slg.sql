@@ -1,45 +1,4 @@
-/*select T2.first_name,T2.last_name , sum(T2.S1), sum(T3.S1)
-from
-(select T1.first_name,T1.last_name, T1.event,sum(T1.cnt) as S1
-from(select first_name,last_name,event,count(*) as cnt from player_names,atbats where player_names.id = atbats.batter_id
-group by atbats.batter_id,event) as T1
-where T1.event = "Single" or T1.event = "Double" or T1.event = "Triple" or T1.event = "Home Run" group by T1.first_name,T1.last_name,T1.event) as T2,
-(select T1.first_name,T1.last_name, T1.event,sum(T1.cnt) as S1
-from(select first_name,last_name,event,count(*) as cnt from player_names,atbats where player_names.id = atbats.batter_id
-group by atbats.batter_id,event) as T1
-where T1.event != "Walk" and T1.event != "Sac Fly" and T1.event != "Sac Bunt" and T1.event != "Hit By Pitch" group by T1.first_name,T1.last_name,T1.event) as T3
-where T2.first_name = T3.first_name and T2.last_name = T3.last_name and T2.event = T3.event
-group by T2.first_name,T2.last_name 
--- order by sum(T2.S1)/sum(T3.S1)
-
-select T_single.year_single as Year,T_single.first_name,T_single.last_name,(sum(T_single.cnt_single)+sum(T_double.cnt_double)+sum(T_triple.cnt_triple)+sum(T_homerun.cnt_homerun))/sum(T_atbat.cnt_atbat) as SLG
-from
-(select substring(ab_id,1,4)as year_single,first_name,last_name,event,count(*) as cnt_single
-from player_names,atbats 
-where player_names.id = atbats.batter_id and (event = "Single")
-group by substring(ab_id,1,4) ,first_name,last_name,event) as T_Single,
-(select substring(ab_id,1,4) as year_double,first_name,last_name,event,2*count(*) as cnt_double
-from player_names,atbats 
-where player_names.id = atbats.batter_id and (event = "Double")
-group by substring(ab_id,1,4),first_name,last_name,event) as T_double,
-(select substring(ab_id,1,4) as year_triple,first_name,last_name,event,3*count(*) as cnt_triple
-from player_names,atbats 
-where player_names.id = atbats.batter_id and (event = "Triple")
-group by substring(ab_id,1,4),first_name,last_name,event) as T_triple,
-(select substring(ab_id,1,4) as year_homerun,first_name,last_name,event,4*count(*) as cnt_homerun
-from player_names,atbats 
-where player_names.id = atbats.batter_id and (event = "Home Run")
-group by substring(ab_id,1,4),first_name,last_name,event) as T_homerun,
-(select substring(ab_id,1,4) as year_atbat,first_name,last_name,count(*) as cnt_atbat
-from player_names,atbats 
-where player_names.id = atbats.batter_id and event != "Walk" and event != "Sac Fly" and event != "Sac Bunt" and event != "Hit By Pitch"
-group by substring(ab_id,1,4),first_name,last_name) as T_atbat
-where T_single.first_name = T_double.first_name and T_triple.first_name = T_double.first_name and T_triple.first_name = T_homerun.first_name 
-        and T_single.last_name = T_double.last_name and T_triple.last_name = T_double.last_name and T_triple.last_name = T_homerun.last_name
-        and T_single.year_single = T_double.year_double and T_triple.year_triple = T_double.year_double and T_triple.year_triple = T_homerun.year_homerun
-group by T_single.year_single,T_single.first_name,T_single.last_name
-*/
-create table batter_slg(
+/*create table batter_slg(
 select Year,first_name,id,last_name,sum(T1.cnt_baserun),sum(T1.cnt_atbat),sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as SLG
 from(
     select substring(ab_id,1,4) as Year,id,first_name,last_name,event,if(event="Single",count(*),if(event="Double",2*count(*),if(event="Triple",3*count(*),if(event="Home Run",4*count(*),0)))) as cnt_baserun, count(*) as cnt_atbat
@@ -50,3 +9,72 @@ from(
 group by Year,first_name,last_name
 having sum(T1.cnt_atbat)>=50
 order by  Year asc,SLG desc);
+*/
+create table batter_slg(
+SELECT 
+    
+	_SG_.years as years,
+    player_names.id,
+    player_names.first_name,
+    player_names.last_name,
+    _SG_.single as "1B",
+    _DB_.doubl as "2B",
+    _TP_.triple as "3B",
+    _HR_.homerun as "HR",
+    _AB_.atbat as "AB"
+FROM
+    player_names,
+    (SELECT 
+        SUBSTRING(a.ab_id, 1, 4) AS years, a.batter_id, count(a.event) as single
+    FROM
+        atbats AS a
+    WHERE
+        a.event = "Single"
+	group by years, a.batter_id
+	)  as _SG_,
+    
+    (SELECT 
+        SUBSTRING(a.ab_id, 1, 4) AS years, a.batter_id, count(a.event) as doubl
+    FROM
+        atbats AS a
+    WHERE
+        a.event = "Double"
+	group by years, a.batter_id
+	) AS _DB_,
+    
+    (SELECT 
+        SUBSTRING(a.ab_id, 1, 4) AS years, a.batter_id, count(a.event) as triple
+    FROM
+        atbats AS a
+    WHERE
+        a.event = "Triple"
+	group by years, a.batter_id
+	) AS _TP_,
+    
+    (SELECT 
+        SUBSTRING(a.ab_id, 1, 4) AS years, a.batter_id, count(a.event) as homerun
+    FROM
+        atbats AS a
+    WHERE
+        a.event = "Home Run"
+	group by years, a.batter_id
+	) AS _HR_,
+
+    (SELECT 
+        SUBSTRING(a.ab_id, 1, 4) AS years, a.batter_id, count(a.event) as atbat
+    FROM
+        atbats AS a
+    WHERE
+        event != "Walk" and event!="Sac Fly" and event!="Sac Bunt" and event != "Hit By Pitch" and event!="Catcher Interference" and event!="Batter Interference" and event!="Intent Walk"
+	group by years, a.batter_id
+	) AS _AB_
+
+WHERE
+        player_names.id = _SG_.batter_id
+        AND   _SG_.batter_id = _DB_.batter_id and _SG_.years = _DB_.years
+        AND _DB_.batter_id = _TP_.batter_id and _DB_.years = _TP_.years
+        AND _TP_.batter_id = _HR_.batter_id and _TP_.years = _HR_.years
+        AND _HR_.batter_id = _AB_.batter_id and _HR_.years = _AB_.years
+        and _AB_.atbat >= 50
+order by years asc, slg desc
+);
