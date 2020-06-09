@@ -12,7 +12,7 @@ where T2.first_name = T3.first_name and T2.last_name = T3.last_name and T2.event
 group by T2.first_name,T2.last_name 
 -- order by sum(T2.S1)/sum(T3.S1)
 */
-select Year,T1.id,first_name,last_name,sum(T1.cnt_baserun) as hit,sum(T1.cnt_atbat) as atbat,sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as AVG
+CREATE TABLE batter_avg select Year,T1.id,first_name,last_name,sum(T1.cnt_baserun) as hit,sum(T1.cnt_atbat) as atbat,sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as AVG
 from(
     select substring(ab_id,1,4) as Year,id,first_name,last_name,event,
             if(event="Single",count(*),
