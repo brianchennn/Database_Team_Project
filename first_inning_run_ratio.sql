@@ -1,6 +1,6 @@
 /*球隊case 2*/
 /*列出所有球隊每一年的首局得分率, 首局總得分數*/
-select score.year, score.team, count(*) as total_game, count(if(score.p_score > 0, score.p_score, null))/count(*) as scoring_rate, sum(score.p_score) as total_score
+CREATE TABLE first_inning_run_ratio select score.year, score.team, count(*) as total_game, count(if(score.p_score > 0, score.p_score, null))/count(*) as scoring_rate, sum(score.p_score) as total_score
 from(
 	select A.p_score, A.g_id, home.team, home.year
 	from(
