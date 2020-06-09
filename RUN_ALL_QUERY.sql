@@ -12,7 +12,7 @@ SOURCE batter_walk.sql;
 SOURCE ejection_info_player.sql;
 SOURCE ejection_info_team.sql;
 SOURCE ejection_max_player.sql;
-SOURCE ejection_max_team.sql;
+SOURCE ejection_team.sql;
 SOURCE ff_velocity_avg.sql;
 SOURCE ff_velocity_avg_years.sql;
 SOURCE ff_velocity_max.sql;
