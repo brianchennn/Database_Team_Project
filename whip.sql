@@ -1,4 +1,4 @@
-SELECT 
+CREATE TABLE whip SELECT 
     player_names.first_name,
     player_names.last_name,
     walk,
