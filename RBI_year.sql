@@ -1,4 +1,4 @@
-select player_names.first_name,player_names.last_name,atbats.p_score
+CREATE TABLE RBI_year select player_names.first_name,player_names.last_name,atbats.p_score
 from atbats, games,player_names
 where player_names.id = atbats.batter_id
 
