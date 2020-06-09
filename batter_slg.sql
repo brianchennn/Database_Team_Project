@@ -22,7 +22,7 @@ SELECT
     _TP_.triple as _3B,
     _HR_.homerun as _HR,
     _AB_.atbat as _AB,
-    (_1B+_2B*2+_3B*3+_HR*4)/_AB as SLG
+    (_SG_.single+_DB_.doubl*2+_TP_.triple*3+_HR_.homerun*4)/_AB_.atbat as SLG
 FROM
     player_names,
     (SELECT 
