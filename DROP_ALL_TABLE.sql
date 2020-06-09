@@ -24,3 +24,6 @@ DROP TABLE strike_ratio_for_every_pitch_type;
 DROP TABLE whip;
 DROP TABLE whip_years;
 
+DROP TABLE pitcher_total_hit_avg;
+DROP TABLE pitcher_total_hit_avg_years;
+DROP TABLE pitcher_total_inning_years
