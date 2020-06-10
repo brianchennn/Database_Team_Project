@@ -1,3 +1,4 @@
+create table pitcher_fip(
 SELECT 
 	K.years as years,
     K.first_name,
@@ -87,4 +88,4 @@ WHERE
     and BB.years = K.years
     and K.years = IP.years
     and IP.years = HBP.years
-order by years,FIP
+order by years,FIP);
