@@ -1,5 +1,5 @@
-/*投手進階 case3*/
-/*每年度, 各投手的球種使用比例, 次數及當下的好壞球數*/
+/*?��??��? case3*/
+/*每年�? ?��??��??�種使用比�?, 次數?�當下�?好�??�數*/
 CREATE TABLE strike_ratio_for_every_pitch_type select total.year, N.id, N.first_name, N.last_name, total.BS as ball_strike, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio
 from(
 	select substring(A.ab_id,1,4) as year, A.pitcher_id, ab_cnt.BS, sum(ab_cnt.cnt) as cnt

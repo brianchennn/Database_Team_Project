@@ -1,5 +1,7 @@
-/*投手進階 case1*/
-/*每年度, 各投手的球種使用比例及次數*/
+/*?��??��? case1*/
+/*每年�? ?��??��??�種使用比�??�次??*/
+create table pitch_type_ratio
+(
 select pitch_type_cnt.year, N.id, N.first_name, N.last_name, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio
 from(
 	select substring(A.ab_id,1,4) as year, A.pitcher_id, sum(ab_cnt.cnt) as cnt
@@ -24,5 +26,6 @@ from(
 	player_names as N
 where pitch_type_cnt.year = total.year
 	and pitch_type_cnt.pitcher_id = total.pitcher_id
-	and pitch_type_cnt.pitcher_id = N.id;
+	and pitch_type_cnt.pitcher_id = N.id
+);
 
