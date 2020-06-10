@@ -1,6 +1,7 @@
 create table pitcher_fip(
 SELECT 
 	K.years as years,
+    K.id,
     K.first_name,
     K.last_name,
     HR.home_run,
@@ -45,14 +46,14 @@ FROM
     
     (
         SELECT 
-            SUBSTRING(a.ab_id, 1, 4) AS years, P.first_name,P.last_name, count(a.event) as strikeout
+            SUBSTRING(a.ab_id, 1, 4) AS years, P.id, P.first_name,P.last_name, count(a.event) as strikeout
         FROM
             atbats AS a,
             player_names as P
         WHERE
             a.event = "Strikeout" and 
             P.id = a.pitcher_id
-        group by years, P.first_name,P.last_name
+        group by years, P.id, P.first_name,P.last_name
 	) AS K,
     (
         SELECT 

@@ -15,7 +15,7 @@ FROM
     FROM
         atbats AS a
     WHERE
-        a.event = 'Walk'
+        a.event = "Walk"
 	group by years, a.pitcher_id
 	) AS Walk,
     
@@ -31,14 +31,14 @@ FROM
     (SELECT 
 		SUBSTRING(atbats2.ab_id, 1, 4) AS years,
         atbats2.pitcher_id,
-		COUNT(*) AS total_innings
+		COUNT(*)/3 AS total_innings
 	FROM
 		(SELECT 
 			a.g_id, a.ab_id, a.pitcher_id
 		FROM
 			atbats AS a
 		WHERE
-			o = 3
+			o != 0 
 		) AS atbats2,
 		games
 	WHERE
