@@ -1,7 +1,6 @@
 create table pitcher_strikeout(
 SELECT 
     Strikeout.years,
-    player_names.id,
     player_names.first_name,
     player_names.last_name,
     pitcher_inning.total_inning,
@@ -19,5 +18,5 @@ FROM
     pitcher_inning
 WHERE
     Strikeout.years = pitcher_inning.years and player_names.id = Strikeout.pitcher_id and Strikeout.pitcher_id = pitcher_inning.id
-GROUP BY Strikeout.years , player_names.id, player_names.first_name , player_names.last_name, pitcher_inning.total_inning
+GROUP BY Strikeout.years, player_names.first_name , player_names.last_name, pitcher_inning.total_inning
 );
