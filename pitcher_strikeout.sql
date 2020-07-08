@@ -1,4 +1,4 @@
-create pitcher_strikeout(
+create table pitcher_strikeout(
 SELECT 
     Strikeout.years,
     player_names.id,
