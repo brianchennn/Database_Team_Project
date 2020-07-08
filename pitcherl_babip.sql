@@ -1,4 +1,4 @@
-create table pitcher_total_babip(
+create table pitcher_babip(
 SELECT 
 	  GO.years as years,
     player_names.id,

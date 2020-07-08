@@ -1,4 +1,4 @@
-create table pitcher_total_hit_avg
+create table pitcher_hit_avg
 (SELECT 
 	FO.years as years,
     player_names.id,

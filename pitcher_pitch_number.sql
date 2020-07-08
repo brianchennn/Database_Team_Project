@@ -1,4 +1,4 @@
-create table pitcher_total_pitch_number
+create table pitcher_pitch_number
 (SELECT 
     SUBSTRING(PC.ab_id, 1, 4) AS years,
     player_names.id,
