@@ -5,7 +5,7 @@ SELECT
     player_names.id,
     player_names.first_name,
     player_names.last_name,
-    count(Num_out)/3 AS total_inning
+    sum(Num_out)/3 AS total_inning
 FROM
     player_names,
     (SELECT 
@@ -14,7 +14,7 @@ FROM
 			  when a.event = 'Double Play' or 
 				   a.event = 'Ground Into DP' or 
 				   a.event = 'Strikout - DP' or 
-				   a.event = 'Sac Fly DP' or 
+				   a.event like 'Sac Fly DP' or 
 				   a.event = 'Sacrifice Bunt DP' then 2
               when a.event = 'Groundout' or
                    a.event = 'Strikeout' or
