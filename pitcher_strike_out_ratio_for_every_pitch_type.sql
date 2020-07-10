@@ -29,7 +29,7 @@ where T.pitcher_id = total.pitcher_id
 	and T.year = total.year
 	and T.pitcher_id = N.id
 	and T.BS = total.BS
-order by T.year, N.id, T.BS, T.pitch_type;
+order by T.year, N.id, T.BS, T.pitch_type
 
 /*drop the temp table*/
 drop table type_cnt;
