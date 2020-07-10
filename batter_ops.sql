@@ -19,9 +19,10 @@ from(
     where player_names.id = atbats.batter_id 
     and event!="Catcher Interference"
     group by substring(ab_id,1,4) ,
+             player_names.id ,
              first_name,
              last_name,event) as T1 
-group by Year, first_name, last_name
+group by Year,T1.id,first_name, last_name
 having sum(cnt_atbat) >= 50) as TTT1,
 (
 select Year,
