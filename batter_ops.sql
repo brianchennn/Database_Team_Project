@@ -1,4 +1,5 @@
-create table batter_ops(select TTT1.Year,TTT1.id,TTT1.first_name,TTT1.last_name,(OBP+SLG) as OPS
+create table batter_ops(
+select TTT1.Year,TTT1.id,TTT1.first_name,TTT1.last_name,(OBP+SLG) as OPS
 from(
 select Year,T1.id,first_name,last_name,sum(cnt_onbase),sum(cnt_atbat),sum(cnt_onbase)/sum(cnt_atbat) as OBP
 from(
@@ -57,5 +58,5 @@ having sum(T1.cnt_atbat)>=50 ) as TTT2
 where TTT1.Year=TTT2.Year
       and TTT1.first_name=TTT2.first_name 
       and TTT1.last_name=TTT2.last_name
-group by TTT1.Year, TTT1.first_name, TTT1.last_name
+group by TTT1.Year,TTT1.id, TTT1.first_name, TTT1.last_name
 order by TTT1.Year,OPS desc);
