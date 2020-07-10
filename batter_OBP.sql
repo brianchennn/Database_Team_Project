@@ -28,7 +28,7 @@ create table batter_OBP(select Year as year,T1.id,first_name,last_name,sum(cnt_o
 
 
 from(
-    select substring(ab_id,1,4)as Year,id,event,if(event="Single",count(*),if(event="Double",count(*),if(event="Triple",count(*),if(event="Home Run",count(*),if(event = "Walk",count(*),if(event="Hit By Pitch",1,if(event="Catcher Interference",count(*),if(event="Intent Walk",count(*),0)))))))) as cnt_onbase, count(*) as cnt_atbat
+    select substring(ab_id,1,4)as Year,first_name,last_name,id,event,if(event="Single",count(*),if(event="Double",count(*),if(event="Triple",count(*),if(event="Home Run",count(*),if(event = "Walk",count(*),if(event="Hit By Pitch",1,if(event="Catcher Interference",count(*),if(event="Intent Walk",count(*),0)))))))) as cnt_onbase, count(*) as cnt_atbat
     from player_names,atbats 
     where player_names.id = atbats.batter_id 
     and event!="Catcher Interference"
