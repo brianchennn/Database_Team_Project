@@ -6,12 +6,12 @@ select batter_avg.year,batter_avg.id, batter_avg.first_name,batter_avg.last_name
 from batter_avg, batter_slg, batter_obp, batter_ops, batter_strikeout, batter_walk
 where batter_avg.id = batter_slg.id and 
 	  batter_slg.id = batter_OBP.id and
-	  batter_obp.id = batter_ops.id and
+	  batter_OBP.id = batter_ops.id and
 	  batter_ops.id = batter_strikeout.id and
 	  batter_strikeout.id = batter_walk.id and
 	  batter_avg.year = batter_slg.year and 
-	  batter_slg.year = batter_obp.year and
-	  batter_obp.year = batter_ops.year and
+	  batter_slg.year = batter_OBP.year and
+	  batter_OBP.year = batter_ops.year and
 	  batter_ops.year = batter_strikeout.year and
 	  batter_strikeout.year = batter_walk.year );
 	  
