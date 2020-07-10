@@ -12,6 +12,6 @@ from(
             and event!="Catcher Interference" 
             and event!="Intent Walk")
     group by substring(ab_id,1,4) ,first_name,last_name,event ) as T1 
-group by Year,first_name,last_name
+group by Year,id,first_name,last_name
 having sum(T1.cnt_atbat)>=100
 order by  Year asc,strikeout_rate desc);
