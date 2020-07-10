@@ -16,7 +16,7 @@ group by T2.id,T2.id
 CREATE TABLE batter_avg (select Year,T1.id,first_name,last_name,sum(T1.cnt_baserun) as hit,sum(T1.cnt_atbat) as atbat,sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as AVG
 
 from(
-    select substring(ab_id,1,4) as Year,id,id,id,event,
+    select substring(ab_id,1,4) as Year,first_name,last_name,id,event,
             if(event="Single",count(*),
             if(event="Double",count(*),
             if(event="Triple",count(*),
@@ -32,5 +32,4 @@ from(
     group by substring(ab_id,1,4) ,id,id,event ) as T1 
 group by Year,id,id
 having sum(T1.cnt_atbat)>=50
-order by  Year asc,AVG desc
-);
+order by  Year asc,AVG desc);
