@@ -14,7 +14,7 @@ FROM
 			  when a.event = 'Double Play' or 
 				   a.event = 'Ground Into DP' or 
 				   a.event = 'Strikout - DP' or 
-				   a.event like 'Sac Fly DP' or 
+				   a.event = 'Sac Fly DP' or 
 				   a.event = 'Sacrifice Bunt DP' then 2
               when a.event = 'Groundout' or
                    a.event = 'Strikeout' or
