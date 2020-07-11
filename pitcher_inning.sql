@@ -1,3 +1,4 @@
+/*每年每場的投手投球局數*/
 drop table if exists pitcher_inning; 
 create table pitcher_inning(
 SELECT years,
