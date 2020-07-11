@@ -3,6 +3,8 @@
 /*奪好球率 ： swing_strike + call_strike + 非兩好球時的界外)/某球種總球數*/
 /*column name ： year, first_name, last_name, pitch_type, ratio, total*/
 /*若好球次數為零因count不到所以要用別種寫法, 但通常都只有1,2次所以我直接忽略(偷懶)*/
+drop table if exists pitcher_take_strike_rate ;
+create table pitcher_take_strike_rate(
 select total_cnt.year, N.first_name, N.last_name, total_cnt.pitch_type, type_cnt.cnt/total_cnt.cnt as ratio, total_cnt.cnt as total
 from (
 	select substring(A.ab_id,1,4) as year, A.pitcher_id, P.pitch_type, count(*) as cnt
@@ -20,4 +22,5 @@ from (
 where N.id = type_cnt.pitcher_id
 	and total_cnt.year = type_cnt.year
 	and total_cnt.pitcher_id = type_cnt.pitcher_id
-	and total_cnt.pitch_type = type_cnt.pitch_type;
+	and total_cnt.pitch_type = type_cnt.pitch_type
+);
