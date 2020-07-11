@@ -1,4 +1,4 @@
-drop table pitcher_inning
+drop table if exists pitcher_inning; 
 create table pitcher_inning(
 SELECT years,
        g_id,
