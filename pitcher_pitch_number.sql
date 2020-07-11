@@ -1,3 +1,13 @@
+/*每年投手投球總數*/
+drop table if exists pitcher_pitch_number;
+create table pitcher_pitch_number(
+    SELECT PNPG.years, PNPG.first_name,PNPG.last_name, sum(Pitch_per_Game) as pitch_num
+    FROM pitch_num_per_game as PNPG
+    GROUP BY PNPG.years, PNPG.first_name,PNPG.last_name
+    order by years, pitch_num desc
+);
+
+/*
 create table pitcher_pitch_number
 (SELECT 
     SUBSTRING(PC.ab_id, 1, 4) AS years,
@@ -26,4 +36,4 @@ FROM
 WHERE
     player_names.id = PC.pitcher_id
 GROUP BY years , player_names.id ,player_names.first_name , player_names.last_name
-);
+);*/

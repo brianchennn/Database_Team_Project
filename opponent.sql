@@ -1,6 +1,7 @@
 /*球隊case 3*/
 /*查詢某球隊每場比賽的對手, 主隊或客隊, 比分*/
 /*以nya為模板*/
+drop table if exists opponent;
 create table opponent(
 select list.g_id, list.home_or_away, list.opponent, list.score, list.opponent_score
 from (

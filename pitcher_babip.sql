@@ -1,3 +1,4 @@
+drop table if exists pitcher_babip;
 create table pitcher_babip(
 SELECT 
 	  GO.years as years,

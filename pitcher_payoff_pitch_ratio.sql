@@ -1,5 +1,6 @@
 /*投手進階 case2*/
 /*每年度, 2好球後各投手的球種使用比例, 次數及當下的好壞球數*/
+drop table if exists payoff_pitch_ratio;
 CREATE TABLE payoff_pitch_ratio select pitch_type_cnt.year, N.id, N.first_name, N.last_name, pitch_type_cnt.BS as ball_strike, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio
 from(
 	select substring(A.ab_id,1,4) as year, A.pitcher_id, ab_cnt.BS, sum(ab_cnt.cnt) as cnt

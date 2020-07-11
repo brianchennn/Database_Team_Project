@@ -1,3 +1,5 @@
+/*轉速與好球率的關係*/
+drop table if exists spin_strike_rate;
 create table spin_strike_rate(
 select T.year, T.first_name,T.last_name,T.p_throws as pitcher_throws ,T.stand as batter_stand,T.pitch_type,T.Spin,sum(strike_cnt)/sum(cnt) as strike_ratio
 from(select substring(A.ab_id,1,4) as year,

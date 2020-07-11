@@ -1,3 +1,4 @@
+drop table if exists ff_velocity_max_years; 
 create table ff_velocity_max_years
 (select
 	SUBSTRING(atbat.ab_id, 1, 4) AS years,

@@ -1,3 +1,5 @@
+/*打擊率*/
+drop table if exists pitcher_hit_avg;
 create table pitcher_hit_avg
 (SELECT 
 	FO.years as years,

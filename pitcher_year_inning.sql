@@ -1,3 +1,4 @@
+drop table if exists pitcher_year_inning;
 create table pitcher_year_inning(
 SELECT years,
        pl.id, 

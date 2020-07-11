@@ -1,3 +1,4 @@
+drop table if exists pitcher_strikeout;
 create table pitcher_strikeout(
 SELECT 
     Strikeout.years,

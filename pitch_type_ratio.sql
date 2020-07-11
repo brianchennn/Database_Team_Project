@@ -1,5 +1,6 @@
-/*?•æ??²é? case1*/
-/*æ¯å¹´åº? ?„æ??‹ç??ƒç¨®ä½¿ç”¨æ¯”ä??Šæ¬¡??*/
+/*?ï¿½ï¿½??ï¿½ï¿½? case1*/
+/*æ¯å¹´ï¿½? ?ï¿½ï¿½??ï¿½ï¿½??ï¿½ç¨®ä½¿ç”¨æ¯”ï¿½??ï¿½æ¬¡??*/
+drop table if  exists pitch_type_ratio;
 create table pitch_type_ratio
 (
 select pitch_type_cnt.year, N.id, N.first_name, N.last_name, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio

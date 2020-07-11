@@ -1,3 +1,4 @@
+drop table if pitcher_walk;
 create table pitcher_walk(
 SELECT 
     Walk.years,

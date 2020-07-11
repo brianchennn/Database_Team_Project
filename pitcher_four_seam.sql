@@ -1,5 +1,6 @@
 /*投手進階 case4*/
 /*每年度各球員四縫線快速球(FF)資訊*/
+drop table if exists pitcher_four_seam;
 create table pitcher_four_seam(
 select substring(A.ab_id,1,4) as year, N.id, N.first_name, N.last_name,
 	round(avg(f_cnt.start_speed),2) as ff_v0_avg, round(max(f_cnt.start_speed),2) as MAX_speed,
