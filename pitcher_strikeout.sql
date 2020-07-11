@@ -1,15 +1,16 @@
-drop table if exists pitcher_strikeout;
+/*drop table if exists pitcher_strikeout;
 create table pitcher_strikeout(
 SELECT 
     Strikeout.years,
     player_names.first_name,
     player_names.last_name,
-    pitcher_inning.total_inning,
+    Strikeout.g_id,
+    pitcher_inning.IP,
     COUNT(*) AS total_strikeout,
-    count(*)/(total_inning*9) as K9
+    count(*)/IP*9 as K9
 FROM
     (SELECT 
-        SUBSTRING(a.ab_id, 1, 4) as years, a.pitcher_id
+        SUBSTRING(a.ab_id, 1, 4) as years, a.g_id,a.pitcher_id
     FROM
         atbats AS a
     WHERE
@@ -19,5 +20,19 @@ FROM
     pitcher_inning
 WHERE
     Strikeout.years = pitcher_inning.years and player_names.id = Strikeout.pitcher_id and Strikeout.pitcher_id = pitcher_inning.id
-GROUP BY Strikeout.years, player_names.first_name , player_names.last_name, pitcher_inning.total_inning
+GROUP BY Strikeout.years, player_names.first_name , player_names.last_name,Strikeout.g_id, pitcher_inning.IP
+order by player_names.first_name , player_names.last_name,Strikeout.g_id asc
 );
+*/
+drop table if exists pitcher_strikeout;
+CREATE TABLE pitcher_strikeout(
+SELECT S.years ,S.first_name,S.last_name,S.strikeout as "K"
+FROM
+    (SELECT SUBSTRING(A.ab_id, 1, 4) AS years, PL.id, PL.first_name, PL.last_name, A.g_id, count(*) as strikeout
+    FROM atbats as A, player_names as PL
+    WHERE A.event="Strikeout" and A.pitcher_id=PL.id
+    GROUP BY years,PL.id, PL.first_name, PL.last_name, A.g_id) as S
+
+   
+order by years, first_name, last_name
+)

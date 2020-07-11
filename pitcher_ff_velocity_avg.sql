@@ -1,3 +1,5 @@
+/*投手每年的直球均速*/
+drop table if exists ff_velocity_avg_years;
 create table ff_velocity_avg_years
 (select
 	SUBSTRING(atbat.ab_id, 1, 4) AS years,

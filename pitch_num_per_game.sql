@@ -1,4 +1,4 @@
-/*紀錄每年每場投手的用球數、局數、平均每個出局的用囚涼*/
+/*紀錄每年每場投手的用球數、局數、平均每個出局的用球數*/
 create table temp(
     SELECT SUBSTRING(A.ab_id, 1, 4) AS years, A.g_id as g_id, P.ab_id, A.pitcher_id,P.pitch_num
     FROM pitches as P, atbats as A
