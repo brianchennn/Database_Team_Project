@@ -1,5 +1,6 @@
-drop table if exists whip_years;
-create table whip_years
+/*(walk + hits)/total_innings*/
+drop table if exists pitcher_whip;
+create table pitcher_whip
 (SELECT 
 	H.years as years,
     player_names.first_name,
@@ -30,27 +31,18 @@ FROM
 	) AS H,
     
     (SELECT 
-		SUBSTRING(atbats2.ab_id, 1, 4) AS years,
-        atbats2.pitcher_id,
-		COUNT(*)/3 AS total_innings
+		years,
+        id,
+		sum(IP) as total_innings
 	FROM
-		(SELECT 
-			a.g_id, a.ab_id, a.pitcher_id
-		FROM
-			atbats AS a
-		WHERE
-			o != 0 
-		) AS atbats2,
-		games
-	WHERE
-		atbats2.g_id = games.g_id
-	GROUP BY years , pitcher_id
+		pitcher_inning
+	GROUP BY years, id
     ) as inning
     
 WHERE
     player_names.id = H.pitcher_id
         AND player_names.id = Walk.pitcher_id and H.years = Walk.years
-        AND player_names.id = inning.pitcher_id and inning.years = H.years
+        AND player_names.id = inning.id and inning.years = H.years
         and total_innings >= 50
 order by years, WHIP
 );

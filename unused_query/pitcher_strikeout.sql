@@ -26,12 +26,14 @@ order by player_names.first_name , player_names.last_name,Strikeout.g_id asc
 */
 drop table if exists pitcher_strikeout;
 CREATE TABLE pitcher_strikeout(
-SELECT S.years ,S.first_name,S.last_name,g_id,sum(strikeout) as "K"
+SELECT S.years ,S.id, S.first_name,S.last_name,g_id,sum(strikeout) as "K"
 FROM
     (SELECT SUBSTRING(A.ab_id, 1, 4) AS years, PL.id, PL.first_name, PL.last_name, A.g_id, if(event="Strikeout",1,0) as strikeout
     FROM atbats as A, player_names as PL
     WHERE  A.pitcher_id=PL.id
     ) as S
 group by years,id,g_id
-order by years, first_name, last_name
+order by years, S.id
 );
+ALTER TABLE pitcher_strikeout
+ADD PRIMARY KEY(g_id,id);

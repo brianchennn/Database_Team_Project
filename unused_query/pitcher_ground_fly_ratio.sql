@@ -1,6 +1,6 @@
 drop table if exists pitcher_ground_fly_ratio;
 CREATE TABLE pitcher_ground_fly_ratio(
-SELECT S.years ,S.first_name,S.last_name,S.g_id, S.S as "Ground", D.D as "Fly", ROUND(S/D,3) as "Ground/Fly"
+SELECT S.years, S.id, S.first_name,S.last_name,S.g_id, S.S as Ground, D.D as Fly, ROUND(S/D,3) as Ground_per_Fly
 FROM
     (SELECT SS.years, SS.id,SS.first_name,SS.last_name, SS.g_id, SS.single,sum(single) as S
     FROM    
@@ -25,3 +25,5 @@ WHERE S.id=D.id
     
 order by years, first_name, last_name, g_id
 );
+ALTER TABLE pitcher_ground_fly_ratio
+ADD PRIMARY KEY(g_id,id);

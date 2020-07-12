@@ -24,7 +24,7 @@ GROUP BY Walk.years, player_names.first_name , player_names.last_name, pitcher_i
 */
 drop table if exists pitcher_walk;
 CREATE TABLE pitcher_walk(
-SELECT S.years ,S.first_name,S.last_name,S.g_id,S.walk as "BB", HBP.hbp as "HBP"
+SELECT S.years, S.id, S.first_name,S.last_name,S.g_id,S.walk as "BB", HBP.hbp as "HBP"
 FROM
     (SELECT SS.years, SS.id, SS.first_name, SS.last_name, SS.g_id, sum(SS.walk) as walk
     FROM
@@ -41,5 +41,7 @@ FROM
         ) as HBPHBP
     GROUP BY HBPHBP.years, HBPHBP.id, HBPHBP.first_name, HBPHBP.last_name, HBPHBP.g_id) as HBP
 where S.id=HBP.id and S.years=HBP.years and S.g_id=HBP.g_id
-order by years, first_name, last_name
+order by years, S.id
 );
+ALTER TABLE pitcher_walk
+ADD PRIMARY KEY(g_id,id);
