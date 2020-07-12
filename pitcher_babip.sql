@@ -1,3 +1,4 @@
+/*BABIP是球留在場內變成安打的比率*/
 drop table if exists pitcher_babip;
 create table pitcher_babip(
 SELECT 

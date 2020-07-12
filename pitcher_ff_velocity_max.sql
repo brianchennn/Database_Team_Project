@@ -1,3 +1,4 @@
+/*每年的直球極速*/
 drop table if exists ff_velocity_max_years; 
 create table ff_velocity_max_years
 (select

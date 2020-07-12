@@ -1,14 +1,14 @@
-DROP TABLE if EXISTS changeup;
-CREATE TABLE changeup(
+DROP TABLE if EXISTS pitcher_changeup;
+CREATE TABLE pitcher_changeup(
     SELECT
     P.years,
     pn.first_name,
     pn.last_name,
     P.pitch_type,
-    avg(P.start_speed) as ch_v0_avg,
-    avg(P.delta_speed) as ch_v_delta_avg,
-    avg(P.delta_y) as ch_y_delta_avg,
-    avg(P.spin_rate) as ch_spin_rate_avg
+    ROUND(avg(P.start_speed),1) as ch_v0_avg,
+    ROUND(avg(P.delta_speed),1) as ch_v_delta_avg,
+    ROUND(avg(P.delta_y),1) as ch_y_delta_avg,
+    ROUND(avg(P.spin_rate),1) as ch_spin_rate_avg
 
     FROM
     (
@@ -26,7 +26,7 @@ CREATE TABLE changeup(
         WHERE
         p.ab_id = a.ab_id and p.pitch_type = "CH"
     )as P,
-    changeup_use_more_than_10 as cumt5,
+    pitcher_changeup_use_more_than_5 as cumt5,
     player_names as pn
 
     WHERE

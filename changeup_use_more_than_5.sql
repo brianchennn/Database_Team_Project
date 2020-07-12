@@ -1,5 +1,5 @@
-DROP TABLE if EXISTS changeup_use_more_than_5;
-CREATE table changeup_use_more_than_5(
+DROP TABLE if EXISTS pitcher_changeup_use_more_than_5;
+CREATE table pitcher_changeup_use_more_than_5(
     SELECT
     SUBSTRING(a.ab_id, 1, 4) as years,
     a.pitcher_id

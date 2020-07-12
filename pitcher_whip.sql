@@ -1,3 +1,4 @@
+drop table if exists whip_years;
 create table whip_years
 (SELECT 
 	H.years as years,
