@@ -8,7 +8,7 @@ CREATE table pitcher_changeup_use_more_than_5(
     (
         SELECT p.ab_id, 
                (case when p.pitch_type = "CH" then 1
-               else 0 end) as CH_count
+               else 0 end) as Use_count
         from pitches as p
     ) as P,
     atbats as a
@@ -16,5 +16,5 @@ CREATE table pitcher_changeup_use_more_than_5(
     WHERE
     P.ab_id = a.ab_id
     GROUP BY years, a.pitcher_id
-    HAVING avg(CH_count) > 0.1
+    HAVING avg(Use_count) > 0.05
 );

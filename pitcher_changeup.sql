@@ -26,11 +26,11 @@ CREATE TABLE pitcher_changeup(
         WHERE
         p.ab_id = a.ab_id and p.pitch_type = "CH"
     )as P,
-    pitcher_changeup_use_more_than_5 as cumt5,
+    pitcher_changeup_use_more_than_5 as temp,
     player_names as pn
 
     WHERE
-    P.years = cumt5.years and P.pitcher_id = cumt5.pitcher_id and cumt5.pitcher_id = pn.id
+    P.years = temp.years and P.pitcher_id = temp.pitcher_id and temp.pitcher_id = pn.id
 
     GROUP BY P.years, pn.first_name, pn.last_name, P.pitch_type
 );
