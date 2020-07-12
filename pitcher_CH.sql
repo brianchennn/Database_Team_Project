@@ -1,6 +1,6 @@
 /*先找出使用率超過5%的有誰*/
-DROP TABLE if EXISTS pitcher_changeup_use_more_than_5;
-CREATE table pitcher_changeup_use_more_than_5(
+DROP TABLE if EXISTS pitcher_CH_use_more_than_5;
+CREATE table pitcher_CH_use_more_than_5(
     SELECT
     SUBSTRING(a.ab_id, 1, 4) as years,
     a.pitcher_id
@@ -21,17 +21,17 @@ CREATE table pitcher_changeup_use_more_than_5(
 );
 
 /*再分析該球種*/
-DROP TABLE if EXISTS pitcher_changeup;
-CREATE TABLE pitcher_changeup(
+DROP TABLE if EXISTS pitcher_CH;
+CREATE TABLE pitcher_CH(
     SELECT
     P.years,
     pn.first_name,
     pn.last_name,
     P.pitch_type,
-    ROUND(avg(P.start_speed),1) as ch_v0_avg,
-    ROUND(avg(P.delta_speed),1) as ch_v_delta_avg,
-    ROUND(avg(P.delta_y),1) as ch_y_delta_avg,
-    ROUND(avg(P.spin_rate),1) as ch_spin_rate_avg
+    ROUND(avg(P.start_speed),1) as CH_v0_avg,
+    ROUND(avg(P.delta_speed),1) as CH_v_delta_avg,
+    ROUND(avg(P.delta_y),1) as CH_y_delta_avg,
+    ROUND(avg(P.spin_rate),1) as CH_spin_rate_avg
 
     FROM
     (
@@ -49,7 +49,7 @@ CREATE TABLE pitcher_changeup(
         WHERE
         p.ab_id = a.ab_id and p.pitch_type = "CH"
     )as P,
-    pitcher_changeup_use_more_than_5 as temp,
+    pitcher_CH_use_more_than_5 as temp,
     player_names as pn
 
     WHERE
