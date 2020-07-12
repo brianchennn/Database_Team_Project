@@ -15,3 +15,4 @@ from(
 group by Year,id,first_name,last_name
 having sum(T1.cnt_atbat)>=100
 order by  Year asc,strikeout_rate desc);
+ALTER table batter_strikeout add primary key(g_id,id);
