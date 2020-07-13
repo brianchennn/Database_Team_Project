@@ -1,41 +1,40 @@
-drop table if exists pitch_type_create_table_per_year; 
+create table _all_pitch_type(
+	select P.pitch_type
+	from pitches as P
+	where P.pitch_type != "" and P.pitch_type != "AB" and P.pitch_type != "FA"
+	group by P.pitch_type);
+
+create table _all_pitcher(
+	select substring(P.ab_id,1,4) as year, A.pitcher_id
+	from pitches as P, atbats as A
+	where P.ab_id = A.ab_id
+	group by substring(P.ab_id,1,4), A.pitcher_id);
+	
+create table _all_pitcher_pitch_type(
+	select T2.year, T2.pitcher_id, T1.pitch_type
+	from _all_pitch_type as T1, _all_pitcher as T2);
+	
+create table _all_pitches(
+	select substring(P.ab_id,1,4) as year, A.pitcher_id, P.pitch_type,
+	round(avg(P.start_speed),1) as v0_avg, round(avg(P.start_speed - P.end_speed),1) as v_delta_avg, 
+	round(avg(P.y - P.y0),1) as y_delta_avg, round(avg(P.spin_rate),1) as spin_rate_avg
+	from pitches as P, atbats as A
+	where P.ab_id = A.ab_id
+	group by substring(P.ab_id,1,4), A.pitcher_id, P.pitch_type);
+
+create table _join(
+	select T1.year, T1.pitcher_id, T1.pitch_type, T2.v0_avg, T2.v_delta_avg, T2.y_delta_avg, T2.spin_rate_avg
+	from _all_pitcher_pitch_type as T1 left join _all_pitches as T2
+	on(T1.year = T2.year and T1.pitcher_id = T2.pitcher_id and T1.pitch_type = T2.pitch_type));
+	
 create table pitch_type_create_table_per_year(
-select  
-        PTPG.years,
-        PTPG.id,
-        PTPG.first_name,
-        PTPG.last_name,
-        sum(PTPG.FF),
-        pitcher_FF.FF_v0_avg,
-        pitcher_FF.FF_v_delta_avg,
-        pitcher_FF.FF_y_delta_avg,
-        pitcher_FF.FF_spin_rate_avg,
-        sum(PTPG.CH),
-        pitcher_CH.CH_v0_avg,
-        pitcher_CH.CH_v_delta_avg,
-        pitcher_CH.CH_y_delta_avg,
-        pitcher_CH.CH_spin_rate_avg,
-        sum(PTPG.EP),pitcher_EP.EP_v0_avg,
-        pitcher_EP.EP_v_delta_avg,
-        pitcher_EP.EP_y_delta_avg,
-        pitcher_EP.EP_spin_rate_avg
-        
-
-from pitch_type_per_game2 as PTPG,
-     pitcher_FF,
-     pitcher_CH,
-     pitcher_EP
-     
-
-where   PTPG.years=pitcher_FF.years 
-    and pitcher_FF.years=pitcher_CH.years
-    and pitcher_CH.years=pitcher_EP.years
-
-    and PTPG.id=pitcher_FF.pitcher_id
-    and pitcher_FF.pitcher_id=pitcher_CH.pitcher_id
-    and pitcher_CH.pitcher_id=pitcher_EP.pitcher_id
-    
-group by PTPG.years,PTPG.id
-);
-    
-    
+	select T.year, T.pitcher_id, N.first_name, N.last_name, T.pitch_type, T.v0_avg, T.v_delta_avg, T.y_delta_avg, T.spin_rate_avg
+	from _join as T, player_names as N
+	where T.pitcher_id = N.id
+	order by T.year, T.pitcher_id, T.pitch_type);
+	
+drop table _all_pitch_type;
+drop table _all_pitcher;
+drop table _all_pitcher_pitch_type;
+drop table _all_pitches;
+drop table _join;
