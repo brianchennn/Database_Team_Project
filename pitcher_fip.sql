@@ -99,6 +99,5 @@ WHERE
     and K.years = IP.years
     and IP.years = HBP.years
 order by years,FIP);
-
-
+alter table pitcher_fip add primary key(years,id);
 

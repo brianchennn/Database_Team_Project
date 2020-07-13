@@ -56,3 +56,4 @@ WHERE
         and flyout + groundout + hits - home_run >= 50
 order by years asc, BABIP asc
 );
+alter table pitcher_babip add primary key(years,id);

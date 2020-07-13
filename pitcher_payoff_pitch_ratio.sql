@@ -1,7 +1,7 @@
 /*投手進階 case2*/
 /*每年度, 2好球後各投手的球種使用比例, 次數及當下的好壞球數*/
-drop table if exists payoff_pitch_ratio;
-CREATE TABLE payoff_pitch_ratio select pitch_type_cnt.year, N.id, N.first_name, N.last_name, pitch_type_cnt.BS as ball_strike, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio
+drop table if exists pitcher_payoff_pitch_ratio;
+CREATE TABLE pitcher_payoff_pitch_ratio select pitch_type_cnt.year, N.id, N.first_name, N.last_name, pitch_type_cnt.BS as ball_strike, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio
 from(
 	select substring(A.ab_id,1,4) as year, A.pitcher_id, ab_cnt.BS, sum(ab_cnt.cnt) as cnt
 	from(
@@ -12,7 +12,7 @@ from(
 		group by P.ab_id, CONCAT_WS('_', P.b_count, P.s_count)) as ab_cnt,
 		atbats as A
 	where A.ab_id = ab_cnt.ab_id
-	group by substring(A.ab_id,1,4), A.pitcher_id, ab_cnt.BS) as total,
+	group by substring(A.ab_id,1,4) , A.pitcher_id, ab_cnt.BS) as total,
 	(
 		select substring(A.ab_id,1,4) as year, A.pitcher_id as pitcher_id, ab_type_cnt.pitch_type as pitch_type, ab_type_cnt.BS, sum(ab_type_cnt.cnt) as cnt
 		from(
@@ -30,3 +30,4 @@ where pitch_type_cnt.year = total.year
 	and pitch_type_cnt.pitcher_id = N.id
 	and pitch_type_cnt.BS = total.BS
 order by total.year, N.id, total.BS, pitch_type_cnt.pitch_type;
+alter table pitcher_payoff_pitch_ratio add primary key(year,id,ball_strike,pitch_type);

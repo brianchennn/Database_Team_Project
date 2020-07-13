@@ -3,6 +3,7 @@ drop table if exists pitcher_whip;
 create table pitcher_whip
 (SELECT 
 	H.years as years,
+    H.pitcher_id as id,
     player_names.first_name,
     player_names.last_name,
     walk,
@@ -46,3 +47,4 @@ WHERE
         and total_innings >= 50
 order by years, WHIP
 );
+alter table pitcher_whip add primary key(years,id);

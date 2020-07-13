@@ -1,5 +1,5 @@
-drop table if exists pitcher_create_table;
-create table pitcher_create_table(
+drop table if exists pitcher_create_table_per_game;
+create table pitcher_create_table_per_game(
 SELECT 
        PH.*,
        pitch_num_per_game.IP,
@@ -9,7 +9,7 @@ SELECT
        PW.HBP,
        PDP.DP,
        PGFR.Ground,PGFR.Fly,
-       PGFR.Ground_per_Fly as "G/F"
+       PGFR.Ground_per_Fly as ground_fly_ratio
 FROM pitcher_hit as PH, pitcher_strikeout as PS, pitcher_walk as PW, pitcher_ground_fly_ratio as PGFR,
     pitch_num_per_game,pitcher_DP as PDP
 WHERE   
@@ -24,6 +24,7 @@ WHERE
     and PGFR.id=pitch_num_per_game.id
     and pitch_num_per_game.id=PDP.id
 );
+alter table pitcher_create_table_per_game add primary key(g_id,id);
     
 
 
