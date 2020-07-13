@@ -2,6 +2,7 @@ drop table if exists batter_babip;
 create table batter_babip(
 SELECT 
 	GO.years as years,
+    player_names.id,
     player_names.first_name,
     player_names.last_name,
     hits,
