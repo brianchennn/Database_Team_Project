@@ -12,7 +12,7 @@ where T2.id = T3.id and T2.id = T3.id and T2.event = T3.event
 group by T2.id,T2.id 
 -- order by sum(T2.S1)/sum(T3.S1)
 */
-
+drop table if exists batter_avg
 CREATE TABLE batter_avg (select Year,T1.id,first_name,last_name,sum(T1.cnt_baserun) as hit,sum(T1.cnt_atbat) as atbat,sum(T1.cnt_baserun)/sum(T1.cnt_atbat) as AVG
 
 from(
@@ -33,3 +33,5 @@ from(
 group by Year,id,id
 having sum(T1.cnt_atbat)>=50
 order by  Year asc,AVG desc);
+
+ALTER TABLE batter_avg ADD PRIMARY KEY(year,id);

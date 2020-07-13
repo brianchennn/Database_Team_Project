@@ -80,3 +80,4 @@ WHERE
         and _AB_.atbat >= 50
 order by year asc, slg desc
 );
+ALTER TABLE batter_slg ADD PRIMARY KEY(year,id);

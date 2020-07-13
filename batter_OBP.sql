@@ -36,3 +36,4 @@ from(
 group by Year,id
 having sum(cnt_atbat) >= 50
 order by  Year asc,OBP desc);
+ALTER TABLE batter_OBP ADD PRIMARY KEY(year,id);

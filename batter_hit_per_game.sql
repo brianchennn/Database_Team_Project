@@ -1,7 +1,7 @@
 /*batter每場的安打*/
 drop table if exists batter_hit_per_game;
 CREATE TABLE batter_hit_per_game(
-SELECT S.years ,S.id, S.first_name,S.last_name,S.g_id, S.S as "Single", D.D as "Double", T.T as "Triple", H.H as "HR"
+SELECT S.years ,S.id, S.first_name,S.last_name,S.g_id, S.S as Single, D.D as DDouble, T.T as Triple, H.H as HR
 FROM
     (SELECT SS.years, SS.id,SS.first_name,SS.last_name, SS.g_id, SS.single,sum(single) as S
     FROM    

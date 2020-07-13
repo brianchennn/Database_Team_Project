@@ -60,3 +60,4 @@ where TTT1.Year=TTT2.Year
       and TTT1.last_name=TTT2.last_name
 group by TTT1.Year,TTT1.id, TTT1.first_name, TTT1.last_name
 order by TTT1.Year,OPS desc);
+ALTER TABLE batter_ops ADD PRIMARY KEY(year,id);
