@@ -1,4 +1,4 @@
-drop table batter_create_table_per_game;
+drop table if exists batter_create_table_per_game;
 create table batter_create_table_per_game(
 select BH.*, BS.K, BW.BB, BW.HBP, BI.IBB, BP.DP as GDP
 from batter_hit_per_game as BH, 
