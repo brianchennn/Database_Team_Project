@@ -27,10 +27,10 @@ from pitch_type_per_game2 as PTPG,
      pitcher_EP
      
 
-where PTPG.years=pitcher_FF.years 
+where   PTPG.years=pitcher_FF.years 
     and pitcher_FF.years=pitcher_CH.years
     and pitcher_CH.years=pitcher_EP.years
-    
+
     and PTPG.id=pitcher_FF.pitcher_id
     and pitcher_FF.pitcher_id=pitcher_CH.pitcher_id
     and pitcher_CH.pitcher_id=pitcher_EP.pitcher_id

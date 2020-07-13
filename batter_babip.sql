@@ -1,3 +1,4 @@
+drop table if exists batter_babip;
 create table batter_babip(
 SELECT 
 	GO.years as years,
