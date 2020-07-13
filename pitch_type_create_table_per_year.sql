@@ -26,7 +26,7 @@ create table _join(
 	select T1.year, T1.pitcher_id, T1.pitch_type, T2.v0_avg, T2.v_delta_avg, T2.y_delta_avg, T2.spin_rate_avg
 	from _all_pitcher_pitch_type as T1 left join _all_pitches as T2
 	on(T1.year = T2.year and T1.pitcher_id = T2.pitcher_id and T1.pitch_type = T2.pitch_type));
-	
+drop table if exists pitch_type_create_table_per_year; 
 create table pitch_type_create_table_per_year(
 	select T.year, T.pitcher_id, N.first_name, N.last_name, T.pitch_type, T.v0_avg, T.v_delta_avg, T.y_delta_avg, T.spin_rate_avg
 	from _join as T, player_names as N

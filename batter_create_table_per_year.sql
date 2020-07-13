@@ -9,10 +9,11 @@ select  batter_avg.year as years,
 		BHPG.Single as Single, 
 		BHPG.DDouble as "Double", 
 		BHPG.Triple as Triple, 
-		BHPG.HR as HR  , 
+		BHPG.HR as HR , 
 		BSPG.K as K, 
 		BWPG.BB as BB,
 		BIPG.IBB as IBB,
+		BDP.DP as DP,
 		batter_avg.AVG,
 		batter_OBP.OBP,
 		batter_slg.SLG, 
@@ -25,7 +26,8 @@ from batter_avg, batter_slg,
 	 batter_IBB as BIPG,
 	 batter_strikeout as BSPG,
 	 batter_babip,
-	 batter_PA as BPA
+	 batter_PA as BPA,
+	 batter_DP as BDP
 where batter_avg.id = batter_slg.id and 
 	  batter_slg.id = batter_OBP.id and
 	  batter_OBP.id = batter_ops.id and
@@ -35,6 +37,7 @@ where batter_avg.id = batter_slg.id and
 	  BIPG.id = BSPG.id and
 	  BSPG.id = batter_babip.id and 
 	  batter_babip.id = BPA.id and 
+	  BPA.id = BDP.id and 
 	  batter_avg.year = batter_slg.year and 
 	  batter_slg.year = batter_OBP.year and
 	  batter_OBP.year = batter_ops.year and
@@ -43,7 +46,8 @@ where batter_avg.id = batter_slg.id and
 	  BWPG.years = BIPG.years and 
 	  BIPG.years = BSPG.years and
 	  BSPG.years = batter_babip.years and 
-	  batter_babip.years = BPA.years
+	  batter_babip.years = BPA.years and 
+	  BPA.years = BDP.years 
 	);
 alter table batter_create_table_per_year add primary key(years,id);
 
