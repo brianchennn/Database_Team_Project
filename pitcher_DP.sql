@@ -12,6 +12,6 @@ FROM
     GROUP BY SS.years, SS.id, SS.first_name, SS.last_name, SS.g_id) as S
     
 order by years, first_name, last_name, DP
-
-primary key(S.g_id,S.id)
 );
+
+alter table pitcher_DP add primary key(g_id,id);

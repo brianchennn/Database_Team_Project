@@ -25,6 +25,7 @@ DROP TABLE if EXISTS pitcher_SC;
 CREATE TABLE pitcher_SC(
     SELECT
     P.years,
+    P.pitcher_id,
     pn.first_name,
     pn.last_name,
     P.pitch_type,
@@ -57,3 +58,4 @@ CREATE TABLE pitcher_SC(
 
     GROUP BY P.years, pn.first_name, pn.last_name, P.pitch_type
 );
+alter table pitcher_SC add primary key(years,pitcher_id);

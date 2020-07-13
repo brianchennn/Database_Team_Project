@@ -26,6 +26,7 @@ DROP TABLE if EXISTS pitcher_PO;
 CREATE TABLE pitcher_PO(
     SELECT
     P.years,
+    P.pitcher_id,
     pn.first_name,
     pn.last_name,
     P.pitch_type,
@@ -48,7 +49,7 @@ CREATE TABLE pitcher_PO(
         FROM
         atbats as a, pitches as p
         WHERE
-        p.ab_id = a.ab_id and p.pitch_type = "PO" or p.pitch_type = "FO"
+        p.ab_id = a.ab_id and (p.pitch_type = "PO" or p.pitch_type = "FO")
     )as P,
     pitcher_PO_use_more_than_5 as temp,
     player_names as pn
@@ -58,3 +59,4 @@ CREATE TABLE pitcher_PO(
 
     GROUP BY P.years, pn.first_name, pn.last_name, P.pitch_type
 );
+alter table pitcher_PO add primary key(years,pitcher_id);
