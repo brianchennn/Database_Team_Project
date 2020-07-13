@@ -9,6 +9,5 @@ FROM
 group by years,id,g_id
 order by years, S.id
 );
-ALTER TABLE batter_strikeout
-ADD PRIMARY KEY(g_id,id);
+
 ALTER table batter_DP_per_game add primary key(g_id,id);
