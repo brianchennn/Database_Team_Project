@@ -1,7 +1,7 @@
 /*球隊case 1*/
 /*列出左投或右投對左打或右打的打擊率*/
-drop table if exists LLRR;
-CREATE TABLE LLRR select cnt_baserun.year,
+drop table if exists team_LLRR;
+CREATE TABLE team_LLRR (select cnt_baserun.year,
 	(case cnt_baserun.pitcher_batter when "LL" then "Left_Left" when "LR" then "Left_Right" when "RL" then "Right_Left" when "RR" then "Right_Right" END) as pitcher_batter_stand
 	, sum(cnt_baserun.cnt) as cnt_baserun, sum(cnt_atbat.cnt) as cnt_atbat,sum(cnt_baserun.cnt)/sum(cnt_atbat.cnt) as AVG
 from (
@@ -39,5 +39,5 @@ where cnt_baserun.year = cnt_atbat.year
 	and cnt_baserun.batter_id = cnt_player.batter_id
 	and cnt_baserun.pitcher_batter = cnt_atbat.pitcher_batter
 group by cnt_baserun.year, cnt_baserun.pitcher_batter
-order by year, field(pitcher_batter_stand, "Left_Left", "Left_Right", "Right_Right", "Right_Left");
+order by year, field(pitcher_batter_stand, "Left_Left", "Left_Right", "Right_Right", "Right_Left"));
 	

@@ -1,6 +1,7 @@
 /*球隊case4*/
 /*所有年度, 所有聯盟分區的戰績*/
-CREATE TABLE region_status select list.year, list.team,
+drop table if exists team_region_status;
+CREATE TABLE team_region_status (select list.year, list.team,
 	(case list.team when "bal" then "AL" when "bos" then "AL" when "nya" then "AL" when "tba" then "AL" when "tor" then "AL"
 		when "cha" then "AL" when "cle" then "AL" when "det" then "AL" when "kca" then "AL" when "min" then "AL"
 		when "hou" then "AL" when "ana" then "AL" when "oak" then "AL" when "sea" then "AL" when "tex" then "AL" 
@@ -21,7 +22,7 @@ from (
 	select G.away_team as team, if(G.home_final_score < G.away_final_score, 1, 0) as win_lose, substring_index(G.date, "-", 1) as year, G.g_id
 	from games as G) as list
 group by list.year, list.team
-order by list.year, League, field(Division, "East", "Central", "West"), win_rate desc;
+order by list.year, League, field(Division, "East", "Central", "West"), win_rate desc);
 
 /*球隊case4*/
 /*所有年度, 單一聯盟分區的戰績*/

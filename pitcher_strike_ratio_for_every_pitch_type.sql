@@ -1,7 +1,7 @@
 /*?��??��? case3*/
 /*每年�? ?��??��??�種使用比�?, 次數?�當下�?好�??�數*/
-drop table if exists strike_ratio_for_every_pitch_type;
-CREATE TABLE strike_ratio_for_every_pitch_type select total.year, N.id, N.first_name, N.last_name, total.BS as ball_strike, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio
+drop table if exists pitcher_strike_ratio_for_every_pitch_type;
+CREATE TABLE pitcher_strike_ratio_for_every_pitch_type (select total.year, N.id, N.first_name, N.last_name, total.BS as ball_strike, pitch_type_cnt.pitch_type, pitch_type_cnt.cnt/total.cnt as ratio
 from(
 	select substring(A.ab_id,1,4) as year, A.pitcher_id, ab_cnt.BS, sum(ab_cnt.cnt) as cnt
 	from(
@@ -27,4 +27,4 @@ where pitch_type_cnt.year = total.year
 	and pitch_type_cnt.pitcher_id = total.pitcher_id
 	and pitch_type_cnt.BS = total.BS
 	and pitch_type_cnt.pitcher_id = N.id
-order by total.year, N.id, total.BS, pitch_type_cnt.pitch_type;
+order by total.year, N.id, total.BS, pitch_type_cnt.pitch_type);
