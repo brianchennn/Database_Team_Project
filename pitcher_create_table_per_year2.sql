@@ -1,3 +1,5 @@
+/*投手年度總數據*/
+--測試 select * from pitcher_create_table_per_year2 limit 10;
 drop table if exists temp1;
 create table temp1(
 SELECT 
@@ -174,3 +176,4 @@ alter table pitcher_create_table_per_year2 add primary key(years,id);
 drop table temp1;
 drop table temp2;
 drop table temp3;
+
