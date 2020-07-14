@@ -35,7 +35,7 @@ create table _join(
 
 drop table if exists pitch_type_create_table_per_game;
 create table pitch_type_create_table_per_game(
-	select substring(T.g_id,1,4) as years, T.pitcher_id as id, N.first_name, N.last_name, T.g_id, T.pitch_type, T.v0_avg, T.y_delta_avg, T.spin_rate_avg
+	select substring(T.g_id,1,4) as years, T.pitcher_id as id, N.first_name, N.last_name, T.g_id, T.pitch_type, T.v0_avg, T.v_delta_avg, T.spin_rate_avg
 	from _join as T, player_names as N
 	where T.pitcher_id = N.id
 	order by T.g_id, T.pitcher_id, T.pitch_type);
