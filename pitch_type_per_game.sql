@@ -381,7 +381,7 @@ GROUP BY years,T.id,T.g_id
 );
 ALTER TABLE t_UN
 ADD primary key(g_id,id);
-
+/*
 drop table if exists pitcher_type_per_game;
 create table pitcher_type_per_game(
 select t_FF.years,
@@ -432,7 +432,7 @@ where  t_FF.g_id=t_CH.g_id
    and t_SL.id=t_UN.id
 GROUP BY t_FF.years,t_FF.id,t_FF.g_id
 );
-
+*/
 
 drop table if exists temp1;
 create table temp1(
