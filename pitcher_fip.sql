@@ -74,7 +74,7 @@ FROM
 	) AS K,
     (
         SELECT PYI.years, PYI.id, PYI.first_name, PYI.last_name, PYI.IP
-        FROM pitcher_year_inning as PYI
+        FROM pitcher_inning as PYI
     )as IP,
     pitcher_fip_constant as FIP_CONST
 
@@ -100,4 +100,5 @@ WHERE
     and IP.years = HBP.years
 order by years,FIP);
 alter table pitcher_fip add primary key(years,id);
+
 
