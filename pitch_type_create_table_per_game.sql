@@ -29,13 +29,13 @@ alter table _all_pitches add primary key(g_id,pitcher_id,pitch_type);
 
 drop table if exists _join;
 create table _join(
-	select T1.pitcher_id, T1.g_id, T1.pitch_type, T2.v0_avg, T2.v_delta_avg, T2.y_delta_avg, T2.spin_rate_avg
+	select T1.pitcher_id, T1.g_id, T1.pitch_type, T2.v0_avg, T2.v_delta_avg, T2.spin_rate_avg
 	from _all_pitcher_pitch_type as T1 left join _all_pitches as T2
 	on(T1.pitcher_id = T2.pitcher_id and T1.pitch_type = T2.pitch_type and T1.g_id = T2.g_id));
 
 drop table if exists pitch_type_create_table_per_game;
 create table pitch_type_create_table_per_game(
-	select substring(T.g_id,1,4) as years, T.pitcher_id as id, N.first_name, N.last_name, T.g_id, T.pitch_type, T.v0_avg, T.v_delta_avg, T.y_delta_avg, T.spin_rate_avg
+	select substring(T.g_id,1,4) as years, T.pitcher_id as id, N.first_name, N.last_name, T.g_id, T.pitch_type, T.v0_avg, T.y_delta_avg, T.spin_rate_avg
 	from _join as T, player_names as N
 	where T.pitcher_id = N.id
 	order by T.g_id, T.pitcher_id, T.pitch_type);
