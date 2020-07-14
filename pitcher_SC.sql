@@ -31,7 +31,6 @@ CREATE TABLE pitcher_SC(
     P.pitch_type,
     ROUND(avg(P.start_speed),1) as SC_v0_avg,
     ROUND(avg(P.delta_speed),1) as SC_v_delta_avg,
-    ROUND(avg(P.delta_y),1) as SC_y_delta_avg,
     ROUND(avg(P.spin_rate),1) as SC_spin_rate_avg
 
     FROM

@@ -31,7 +31,6 @@ CREATE TABLE pitcher_KN(
     P.pitch_type,
     ROUND(avg(P.start_speed),1) as KN_v0_avg,
     ROUND(avg(P.delta_speed),1) as KN_v_delta_avg,
-    ROUND(avg(P.delta_y),1) as KN_y_delta_avg,
     ROUND(avg(P.spin_rate),1) as KN_spin_rate_avg
 
     FROM

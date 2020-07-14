@@ -17,7 +17,7 @@ create table _all_pitcher_pitch_type(
 create table _all_pitches(
 	select substring(P.ab_id,1,4) as year, A.pitcher_id, P.pitch_type,
 	round(avg(P.start_speed),1) as v0_avg, round(avg(P.start_speed - P.end_speed),1) as v_delta_avg, 
-	round(avg(P.y - P.y0),1) as y_delta_avg, round(avg(P.spin_rate),1) as spin_rate_avg
+	round(avg(P.spin_rate),1) as spin_rate_avg
 	from pitches as P, atbats as A
 	where P.ab_id = A.ab_id
 	group by substring(P.ab_id,1,4), A.pitcher_id, P.pitch_type);
