@@ -18,7 +18,7 @@ select T.years,
        T.GDP 
 from   batter_create_table_per_game as T, 
        batter_PA_per_game as A, 
-       batter_AB_per_game as B
+       batter_AB_per_game as B,
 where T.g_id=A.g_id and
       A.g_id=B.g_id and 
       T.id=A.id AND
