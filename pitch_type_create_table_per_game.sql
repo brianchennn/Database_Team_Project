@@ -39,7 +39,7 @@ create table pitch_type_create_table_per_game(
 	from _join as T, player_names as N
 	where T.pitcher_id = N.id
 	order by T.g_id, T.pitcher_id, T.pitch_type);
-alter table pitch_type_create_table_per_game add primary key(g_id,id);
+/*alter table pitch_type_create_table_per_game add primary key(g_id,id);*/
 	
 drop table _all_pitch_type;
 drop table _all_pitcher;
