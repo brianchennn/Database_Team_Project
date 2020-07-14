@@ -36,7 +36,7 @@ FROM
     WHERE
         a.event = "Home Run" and 
         P.id = a.pitcher_id
-	group by years, P.first_name,P.last_name
+	group by years, id
 	) AS HR,
 
     (SELECT 
@@ -47,7 +47,7 @@ FROM
     WHERE
         (a.event = "Walk" or a.event = "Intent Walk" )and 
         P.id = a.pitcher_id
-	group by years, P.first_name,P.last_name
+	group by years, id
 	) AS BB,
 
     (SELECT 
@@ -58,7 +58,7 @@ FROM
     WHERE
         a.event = "Hit By Pitch" and 
         P.id = a.pitcher_id
-	group by years, P.first_name,P.last_name
+	group by years, id
 	) AS HBP,
     
     (
@@ -70,11 +70,12 @@ FROM
         WHERE
             a.event = "Strikeout" and 
             P.id = a.pitcher_id
-        group by years, P.id, P.first_name,P.last_name
+        group by years, P.id
 	) AS K,
     (
-        SELECT PYI.years, PYI.id, PYI.first_name, PYI.last_name, PYI.IP
+        SELECT PYI.years, PYI.id, PYI.first_name, PYI.last_name, sum(PYI.IP) as IP
         FROM pitcher_inning as PYI
+        group by years, id
     )as IP,
     pitcher_fip_constant as FIP_CONST
 
@@ -83,7 +84,7 @@ WHERE
     and BB.id = K.id
     and K.id = IP.id
     and IP.id = HBP.id
-    and HR.id = BB.id
+
     /*
     HR.first_name = BB.first_name
     and BB.first_name = K.first_name
@@ -98,7 +99,8 @@ WHERE
     and BB.years = K.years
     and K.years = IP.years
     and IP.years = HBP.years
-order by years,FIP);
+    
+);
 alter table pitcher_fip add primary key(years,id);
 
 

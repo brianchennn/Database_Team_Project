@@ -3,7 +3,6 @@ create table pitcher_hit_per_year(
 select years ,
     id, 
     first_name,last_name,
-    g_id, 
     sum(Single) as Single, 
     sum(DDouble) as DDouble, 
     sum(Triple) as Triple,

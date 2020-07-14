@@ -2,8 +2,8 @@
 drop table if exists pitcher_inning; 
 create table pitcher_inning(
 SELECT years,
-       g_id,
        pl.id, 
+       g_id,
        pl.first_name, 
        pl.last_name, 
        ROUND(sum(out_diff)/3,3) as IP
@@ -17,6 +17,6 @@ FROM(
     FROM    atbats AS a,(SELECT @pre_out := 0, @pre_pitcher_id="", @pre_g_id="") as ini) as T,
             player_names as pl
 WHERE pl.id=T.pitcher_id
-GROUP BY years,g_id,pitcher_id );
+GROUP BY years,pitcher_id,g_id );
         
 

@@ -28,7 +28,7 @@ drop table if exists pitcher_strikeout;
 CREATE TABLE pitcher_strikeout(
 SELECT S.years ,S.id, S.first_name,S.last_name,g_id,sum(strikeout) as K
 FROM
-    (SELECT SUBSTRING(A.ab_id, 1, 4) AS years, PL.id, PL.first_name, PL.last_name, A.g_id, if(event="Strikeout",1,0) as strikeout
+    (SELECT SUBSTRING(A.ab_id, 1, 4) AS years, PL.id, PL.first_name, PL.last_name, A.g_id, if(event like "Strikeout%",1,0) as strikeout
     FROM atbats as A, player_names as PL
     WHERE  A.pitcher_id=PL.id
     ) as S
