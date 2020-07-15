@@ -10,7 +10,7 @@ SELECT
        PDP.DP,
        PGFR.Ground,PGFR.Fly,
        PGFR.Ground_per_Fly as ground_fly_ratio,
-       G.date
+       date_format(G.date,"%Y%M%D")
 FROM pitcher_hit as PH, pitcher_strikeout as PS, pitcher_walk as PW, pitcher_ground_fly_ratio as PGFR,
     pitch_num_per_game,pitcher_DP as PDP, games as G
 WHERE   
@@ -29,4 +29,4 @@ WHERE
 alter table pitcher_create_table_per_game add primary key(g_id,id);
     
 
-
+-- select * from pitcher_create_table_per_game limit 10;

@@ -16,7 +16,7 @@ select T.years,
        T.IBB,
        T.SF, 
        T.GDP,
-       G.date 
+       date_format(G.date,"%Y%m%d")
 from   batter_create_table_per_game as T, 
        batter_PA_per_game as A, 
        batter_AB_per_game as B,
