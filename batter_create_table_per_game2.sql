@@ -15,12 +15,16 @@ select T.years,
        T.HBP, 
        T.IBB,
        T.SF, 
-       T.GDP 
+       T.GDP,
+       G.date 
 from   batter_create_table_per_game as T, 
        batter_PA_per_game as A, 
        batter_AB_per_game as B,
+       games as G
 where T.g_id=A.g_id and
-      A.g_id=B.g_id and 
+      A.g_id=B.g_id and
+      B.g_id=G.g_id and
       T.id=A.id AND
       A.id=B.id
 );
+--  select * from batter_create_table_per_game2 limit 10;

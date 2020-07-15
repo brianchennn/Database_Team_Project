@@ -9,15 +9,17 @@ SELECT
        PW.HBP,
        PDP.DP,
        PGFR.Ground,PGFR.Fly,
-       PGFR.Ground_per_Fly as ground_fly_ratio
+       PGFR.Ground_per_Fly as ground_fly_ratio,
+       G.date
 FROM pitcher_hit as PH, pitcher_strikeout as PS, pitcher_walk as PW, pitcher_ground_fly_ratio as PGFR,
-    pitch_num_per_game,pitcher_DP as PDP
+    pitch_num_per_game,pitcher_DP as PDP, games as G
 WHERE   
     PS.g_id=PW.g_id
     and PW.g_id=PH.g_id
     and PH.g_id=PGFR.g_id
     and PGFR.g_id=pitch_num_per_game.g_id
     and pitch_num_per_game.g_id=PDP.g_id
+    and PDP.g_id=G.g_id
     and PS.id=PH.id
     and PH.id=PW.id
     and PW.id=PGFR.id
