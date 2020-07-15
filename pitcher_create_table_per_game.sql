@@ -10,7 +10,7 @@ SELECT
        PDP.DP,
        PGFR.Ground,PGFR.Fly,
        PGFR.Ground_per_Fly as ground_fly_ratio,
-       date_format(G.date,"%Y%M%D")
+       date_format(G.date,"%Y%m%d") as date
 FROM pitcher_hit as PH, pitcher_strikeout as PS, pitcher_walk as PW, pitcher_ground_fly_ratio as PGFR,
     pitch_num_per_game,pitcher_DP as PDP, games as G
 WHERE   

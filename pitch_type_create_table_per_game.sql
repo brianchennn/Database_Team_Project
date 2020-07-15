@@ -66,7 +66,7 @@ create table _join(
 	on(T1.g_id = T3.g_id and T1.id = T3.id and T1.pitch_type = T3.pitch_type)
 	left join _all_pitcher_pitch_type_cnt as T4
 	on(T1.g_id = T4.g_id and T1.id = T4.id));
-
+alter table _join add primary key(g_id,id,pitch_type);
 drop table _all_pitch_type;
 drop table _all_pitcher;
 drop table _all_pitcher_pitch_type;
@@ -89,10 +89,10 @@ create table pitch_type_create_table_per_game(
 			T.v0_avg,
 			T.v_delta_avg,
 			T.spin_rate_avg,
-			date_format(G.date,"%Y%m%d")
+			date_format(G.date,"%Y%m%d") as Date
 	from _join as T, player_names as N, games as G
 	where T.id = N.id and T.g_id=G.g_id
 	order by T.g_id, T.id, T.pitch_type);
-/*alter table pitch_type_create_table_per_game add primary key(g_id,id);*/
+alter table pitch_type_create_table_per_game add primary key(g_id,id,pitch_type);
 	
 drop table _join;
