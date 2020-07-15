@@ -1,6 +1,7 @@
+drop table if exists batter_create_table_interval;
 create table batter_create_table_interval(       
     select first_name,last_name,           
-    sum(PA) as PA,sum(AB) as AB,sum(Single) as Single,sum(DDouble) as DDouble,sum(Triple)     ,      
+    sum(PA) as PA,sum(AB) as AB,sum(Single) as Single,sum(DDouble) as DDouble,sum(Triple)    as Triple ,      
     sum(HR) as HR,sum(K) as K,sum(BB) as BB,sum(HBP)as HBP,sum(IBB) as IBB,           
     (sum(Single)+sum(DDouble)+sum(Triple)+sum(HR))/sum(AB) as AVG,           
     (sum(Single)+sum(DDouble)+sum(Triple)+sum(HR)+sum(HBP)+sum(BB))/(sum(AB)+sum(BB)+sum(HBP)+sum(SF)) as OBP,           
@@ -10,5 +11,6 @@ create table batter_create_table_interval(
     sum(SF) as SF,     
     sum(GDP) as GDP,           
     sum(ROE) as ROE from batter_create_table_per_game2 as A        
-    where Date between 20150405 and 20150415             
-    group by id );
+    where Date between 20150405 and 20150415          
+    group by first_name,last_name 
+    );
