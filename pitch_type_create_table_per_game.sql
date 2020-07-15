@@ -88,9 +88,10 @@ create table pitch_type_create_table_per_game(
 			T.strike_ratio,
 			T.v0_avg, 
 			T.v_delta_avg, 
-			T.spin_rate_avg
-	from _join as T, player_names as N
-	where T.id = N.id
+			T.spin_rate_avg,
+			G.date
+	from _join as T, player_names as N, games as G
+	where T.id = N.id and T.g_id=G.g_id
 	order by T.g_id, T.id, T.pitch_type);
 /*alter table pitch_type_create_table_per_game add primary key(g_id,id);*/
 	
